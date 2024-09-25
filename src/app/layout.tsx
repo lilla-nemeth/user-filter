@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import '../styles/global.scss';
+import '@/app/styles/global.scss';
 
 export const metadata: Metadata = {
 	title: 'Users Dashboard',

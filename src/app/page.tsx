@@ -1,4 +1,4 @@
-import styles from '../styles/Dashboard.module.scss';
+import styles from '@/app/styles/Dashboard.module.scss';
 
 export default function Dashboard() {
 	return (
