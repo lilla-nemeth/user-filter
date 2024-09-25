@@ -1,7 +1,11 @@
 function Button(props: any) {
-	const { type, text } = props;
+	const { type, text, className } = props;
 
-	return <button type={type}>{text}</button>;
+	return (
+		<button className={className} type={type}>
+			{text}
+		</button>
+	);
 }
 
 export default Button;

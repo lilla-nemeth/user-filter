@@ -61,7 +61,7 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<div style={{ fontSize: '40px', display: 'flex', padding: '10px', justifyContent: 'center' }}>Users</div>
+			<div style={{ fontSize: '40px', display: 'flex', padding: '40px', justifyContent: 'center' }}>Users</div>
 			<div style={{ display: 'flex', padding: '40px', justifyContent: 'center' }}>
 				<Input
 					className={styles.searchInput}
@@ -71,7 +71,7 @@ export default function Dashboard() {
 					value={search}
 					onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(setSearch, e)}
 				/>
-				<Button type={'submit'} text={'Search'} />
+				<Button className={styles.searchButton} type={'submit'} text={'Search'} />
 			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 				{users.map((user: any) => (

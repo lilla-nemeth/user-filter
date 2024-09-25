@@ -4,7 +4,12 @@
 	background-color: $secondary-color;
 }
 
-.searchInput {
+.searchInput,
+.searchButton {
 	padding: $input-padding;
+	border: $input-border;
+}
+
+.searchInput {
 	width: $input-width;
 }
