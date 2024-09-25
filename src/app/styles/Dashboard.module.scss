@@ -3,3 +3,13 @@
 .card {
 	background-color: $secondary-color;
 }
+
+.searchInput,
+.searchButton {
+	padding: $input-padding;
+	border: $input-border;
+}
+
+.searchInput {
+	width: $input-width;
+}
