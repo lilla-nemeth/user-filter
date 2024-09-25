@@ -1,8 +1,8 @@
 function Button(props: any) {
-	const { type, text, className } = props;
+	const { type, text, className, onClick } = props;
 
 	return (
-		<button className={className} type={type}>
+		<button className={className} type={type} onClick={onClick}>
 			{text}
 		</button>
 	);

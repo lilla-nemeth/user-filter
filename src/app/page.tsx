@@ -10,7 +10,7 @@ import Input from './components/Input';
 import Button from './components/Button';
 
 // Helpers
-import { handleInputChange } from './utils/helpers';
+import { handleInputChange, handleButtonClick } from './utils/helpers';
 
 // Types
 import * as dataTypes from '@/types/data';
@@ -45,6 +45,11 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
+	const filteredData = userData.filter((user: any) => {
+		// address won't work with this option, but other parts are searchable
+		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
+	});
+
 	return (
 		<div>
 			<div style={{ fontSize: '40px', display: 'flex', padding: '40px', justifyContent: 'center' }}>Users</div>
@@ -59,17 +64,18 @@ export default function Dashboard() {
 						handleInputChange(setSearch, e);
 
 						if (search !== '') {
-							const filteredData = userData.filter((user: any) => {
-								// address won't work with this option, but other parts are searchable
-								return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
-							});
 							setFilteredUserData(filteredData);
 						} else {
 							setFilteredUserData(userData);
 						}
 					}}
 				/>
-				<Button className={styles.searchButton} type={'submit'} text={'Search'} />
+				<Button
+					className={styles.searchButton}
+					type={'submit'}
+					text={'Search'}
+					onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
+				/>
 			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 				{search.length > 1
