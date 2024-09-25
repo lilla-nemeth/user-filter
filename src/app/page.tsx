@@ -1,5 +1,7 @@
 'use client';
 import { ChangeEvent, useEffect, useState } from 'react';
+
+// Styles
 import styles from '@/app/styles/Dashboard.module.scss';
 
 // Components
@@ -10,32 +12,14 @@ import Button from './components/Button';
 // Helpers
 import { handleInputChange } from './utils/helpers';
 
-interface UserLocation {
-	lat: string;
-	lng: string;
-}
-
-interface UserAddress {
-	street: string;
-	suite: string;
-	city: string;
-	zipcode: string;
-	geo: UserLocation[];
-}
-
-interface User {
-	id: number;
-	name: string;
-	email: string;
-	phone: string;
-	website: string;
-	address: UserAddress[];
-}
+// Types
+import * as dataTypes from '@/types/data';
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
-	const [users, setUsers] = useState<User[]>([]);
-	const [error, setError] = useState<string | undefined>('');
+	const [userData, setUserData] = useState<dataTypes.User[]>([]);
+	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
+	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -45,8 +29,10 @@ export default function Dashboard() {
 					// when failed to fetch data, user friendly error message is displayed:
 					throw new Error('Something went wrong, please come back later.');
 				}
-				const userData: User[] = await res.json();
-				setUsers(userData);
+				const users: dataTypes.User[] = await res.json();
+
+				setUserData(users);
+				setFilteredUserData(userData);
 			} catch (err) {
 				setError((err as Error).message);
 			}
@@ -59,6 +45,8 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
+	const searchCategories = ['name', 'email', 'address', 'phone', 'website'];
+
 	return (
 		<div>
 			<div style={{ fontSize: '40px', display: 'flex', padding: '40px', justifyContent: 'center' }}>Users</div>
@@ -69,14 +57,33 @@ export default function Dashboard() {
 					type={'search'}
 					name={'search'}
 					value={search}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(setSearch, e)}
+					onChangeCallback={() => {
+						console.log(filteredUserData);
+					}}
+					onChange={(e: ChangeEvent<HTMLInputElement>) => {
+						handleInputChange(setSearch, e);
+
+						if (search !== '') {
+							const filteredData = userData.filter((user: any) => {
+								// address won't work with this option, but other parts are searchable
+								return searchCategories.some((category: any) => user[category].toString().toLowerCase().includes(search.toLowerCase()));
+							});
+							setFilteredUserData(filteredData);
+						} else {
+							setFilteredUserData(userData);
+						}
+					}}
 				/>
 				<Button className={styles.searchButton} type={'submit'} text={'Search'} />
 			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-				{users.map((user: any) => (
-					<Card className={styles.card} user={user} key={user.id} />
-				))}
+				{search.length > 1
+					? filteredUserData.map((user: any) => {
+							return <Card className={styles.card} user={user} key={user.id} />;
+					  })
+					: userData.map((user: any) => {
+							return <Card className={styles.card} user={user} key={user.id} />;
+					  })}
 			</div>
 		</div>
 	);
