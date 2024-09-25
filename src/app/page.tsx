@@ -1,6 +1,7 @@
 import styles from '@/app/styles/Dashboard.module.scss';
 import Card from './components/Card';
 import Input from './components/Input';
+import Button from './components/Button';
 
 interface UserLocation {
 	lat: string;
@@ -46,7 +47,10 @@ export default async function Dashboard() {
 	return (
 		<div>
 			<div style={{ fontSize: '40px', display: 'flex', padding: '10px', justifyContent: 'center' }}>Users</div>
-			<Input htmlFor={'card-search'} type={'search'} id={'card-search'} name={'search'} text={'Search'} />
+			<div style={{ display: 'flex', padding: '40px', justifyContent: 'center' }}>
+				<Input className={styles.searchInput} htmlFor={'card-search'} type={'search'} name={'search'} />
+				<Button type={'submit'} text={'Search'} />
+			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 				{users.map((user: any) => (
 					<Card className={styles.card} user={user} key={user.id} />
