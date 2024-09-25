@@ -45,8 +45,6 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const searchCategories = ['name', 'email', 'address', 'phone', 'website'];
-
 	return (
 		<div>
 			<div style={{ fontSize: '40px', display: 'flex', padding: '40px', justifyContent: 'center' }}>Users</div>
@@ -57,16 +55,13 @@ export default function Dashboard() {
 					type={'search'}
 					name={'search'}
 					value={search}
-					onChangeCallback={() => {
-						console.log(filteredUserData);
-					}}
 					onChange={(e: ChangeEvent<HTMLInputElement>) => {
 						handleInputChange(setSearch, e);
 
 						if (search !== '') {
 							const filteredData = userData.filter((user: any) => {
 								// address won't work with this option, but other parts are searchable
-								return searchCategories.some((category: any) => user[category].toString().toLowerCase().includes(search.toLowerCase()));
+								return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
 							});
 							setFilteredUserData(filteredData);
 						} else {
