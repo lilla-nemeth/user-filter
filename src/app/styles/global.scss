@@ -113,6 +113,7 @@ input {
 :root {
 	--primary-color: #{$primary-color};
 	--secondary-color: #{$secondary-color};
+	--grey: #{$grey};
 }
 
 html,
@@ -130,4 +131,16 @@ body {
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+}
+
+.dropdown {
+	width: 300px;
+	padding: 1rem;
+	background-color: $grey;
+}
+
+.dropdownElement {
+	width: 300px;
+	padding: 1rem;
+	background-color: $secondary-color;
 }

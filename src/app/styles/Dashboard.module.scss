@@ -1,7 +1,43 @@
 @import './variables';
 
+.pageTitle {
+	display: flex;
+	justify-content: center;
+	padding: 40px;
+	font-size: 40px;
+}
+
+.cardWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .card {
 	background-color: $secondary-color;
+	min-width: 400px;
+	margin: 30px;
+	padding: 10px;
+	display: flex;
+}
+
+.cardCategories {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+	color: green;
+}
+
+.cardValues {
+	display: flex;
+	width: 70%;
+	flex-direction: column;
+}
+
+.searchBox {
+	display: flex;
+	padding: 40px;
+	justify-content: center;
 }
 
 .searchInput,

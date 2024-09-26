@@ -5,15 +5,17 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import styles from '@/app/styles/Dashboard.module.scss';
 
 // Components
-import Card from './components/Card';
 import Input from './components/Input';
 import Button from './components/Button';
+import Dropdown from './components/Dropdown';
+import Card from './components/Card';
 
 // Helpers
 import { handleInputChange, handleButtonClick } from './utils/helpers';
 
 // Types
 import * as dataTypes from '@/types/data';
+import DropdownElement from './components/DropdownElement';
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
@@ -52,8 +54,8 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<div style={{ fontSize: '40px', display: 'flex', padding: '40px', justifyContent: 'center' }}>Users</div>
-			<div style={{ display: 'flex', padding: '40px', justifyContent: 'center' }}>
+			<div className={styles.pageTitle}>Users</div>
+			<div className={styles.searchBox}>
 				<Input
 					className={styles.searchInput}
 					htmlFor={'card-search'}
@@ -77,13 +79,34 @@ export default function Dashboard() {
 					onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 				/>
 			</div>
-			<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+			<div>
+				<Dropdown className='dropdown' text={'Dropdown head'}>
+					<DropdownElement className='dropdownElement' text={'Dropdown element'} />
+				</Dropdown>
+			</div>
+			<div className={styles.cardWrapper}>
 				{search.length > 1
 					? filteredUserData.map((user: any) => {
-							return <Card className={styles.card} user={user} key={user.id} />;
+							return (
+								<Card
+									cardClassName={styles.card}
+									valueClassName={styles.cardValues}
+									categoryClassName={styles.cardCategories}
+									user={user}
+									key={user.id}
+								/>
+							);
 					  })
 					: userData.map((user: any) => {
-							return <Card className={styles.card} user={user} key={user.id} />;
+							return (
+								<Card
+									cardClassName={styles.card}
+									valueClassName={styles.cardValues}
+									categoryClassName={styles.cardCategories}
+									user={user}
+									key={user.id}
+								/>
+							);
 					  })}
 			</div>
 		</div>
