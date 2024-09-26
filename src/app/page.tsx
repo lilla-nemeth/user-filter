@@ -22,7 +22,7 @@ import { SORT_BY } from '@/types/constants';
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
-	const [userData, setUserData] = useState<dataTypes.User[]>([]);
+	const [userAPIData, setUserAPIData] = useState<dataTypes.User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [display, setDisplay] = useState<string>('none');
@@ -41,8 +41,8 @@ export default function Dashboard() {
 				}
 				const users: dataTypes.User[] = await res.json();
 
-				setUserData(users);
-				setFilteredUserData(userData);
+				setUserAPIData(users);
+				setFilteredUserData(userAPIData);
 			} catch (err) {
 				setError((err as Error).message);
 			}
@@ -55,7 +55,7 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userData.filter((user: any) => {
+	const filteredData = userAPIData.filter((user: any) => {
 		// address won't work with this option, but other parts are searchable
 		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
 	});
@@ -92,7 +92,7 @@ export default function Dashboard() {
 						if (search !== '') {
 							setFilteredUserData(filteredData);
 						} else {
-							setFilteredUserData(userData);
+							setFilteredUserData(userAPIData);
 						}
 					}}
 				/>
@@ -127,7 +127,7 @@ export default function Dashboard() {
 									/>
 								);
 						  })
-						: userData.map((user: any) => {
+						: userAPIData.map((user: any) => {
 								return (
 									<Card
 										cardClassName={styles.card}
