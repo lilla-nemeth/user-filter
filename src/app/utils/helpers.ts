@@ -12,7 +12,7 @@ const handleButtonClick = (stateSetter: Dispatch<SetStateAction<dataTypes.User[]
 };
 
 const listRequiredCategories = (key: string, stringArray: string[]): any => {
-	if (stringArray.includes(key.toLowerCase())) {
+	if (stringArray.includes(key)) {
 		return key.charAt(0).toUpperCase() + key.slice(1);
 	}
 };
