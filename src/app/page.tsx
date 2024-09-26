@@ -26,10 +26,7 @@ export default function Dashboard() {
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [display, setDisplay] = useState<string>('none');
-
-	const [sortText, setSortText] = useState<any>(SORT_BY);
-	// temporary hard coded category
-	const [sortCategory, setSortCategory] = useState<any>('Name');
+	const [sortCategory, setSortCategory] = useState<any>(SORT_BY);
 
 	const acceptedSortCategories = ['name', 'email'];
 
@@ -66,16 +63,12 @@ export default function Dashboard() {
 		if (display === 'none') {
 			setDisplay('block');
 
-			if (sortText !== SORT_BY) {
-				setSortText(SORT_BY);
+			if (sortCategory !== SORT_BY) {
+				setSortCategory(SORT_BY);
 			}
 		} else {
 			setDisplay('none');
 		}
-	};
-
-	const handleTextChange = () => {
-		setSortText(sortCategory);
 	};
 
 	return (
@@ -107,13 +100,13 @@ export default function Dashboard() {
 			</div>
 			<div className='sortContainer'>
 				<div className='dropdownWrapper'>
-					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortText} onClick={handleDisplay}>
+					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortCategory} onClick={handleDisplay}>
 						<DropdownList
 							dropdownListClassName='dropdownList'
 							dropdownItemClassName='dropdownItem'
 							display={display}
 							data={userAPIData}
-							onClick={handleTextChange}
+							setSortCategory={setSortCategory}
 							acceptedCategories={acceptedSortCategories}
 						/>
 					</Dropdown>
