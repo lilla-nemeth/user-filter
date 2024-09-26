@@ -1,11 +1,10 @@
 function AscendingIcon(props: any) {
-	const { className, descendingOrder } = props;
+	const { className, isAscending } = props;
 
-	console.log(descendingOrder);
 	return (
 		<svg
 			className={className}
-			style={{ transform: descendingOrder ? 'rotate(180deg)' : '' }}
+			style={{ transform: !isAscending ? 'rotate(180deg)' : '' }}
 			clipRule='evenodd'
 			fillRule='evenodd'
 			strokeLinejoin='round'

@@ -11,7 +11,7 @@ import Dropdown from './components/Dropdown';
 import Card from './components/Card';
 
 // Helpers
-import { handleInputChange, handleButtonClick } from './utils/helpers';
+import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helpers';
 
 // Types
 import * as dataTypes from '@/types/data';
@@ -27,7 +27,7 @@ export default function Dashboard() {
 	const [error, setError] = useState<string | null>(null);
 	const [display, setDisplay] = useState<string>('none');
 	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
-	const [descendingOrder, setDescendingOrder] = useState<boolean>(false);
+	const [isAscending, setIsAscending] = useState<boolean>(true);
 
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
@@ -110,7 +110,8 @@ export default function Dashboard() {
 							setSortCategoryName={setSortCategoryName}
 							acceptedCategories={acceptedSortCategories}
 							setUserAPIData={setUserAPIData}
-							setDescendingOrder={setDescendingOrder}
+							isAscending={isAscending}
+							setIsAscending={setIsAscending}
 						/>
 					</Dropdown>
 				</div>
@@ -118,9 +119,10 @@ export default function Dashboard() {
 					<Button
 						className='orderButton'
 						onClick={() => {
-							setDescendingOrder(!descendingOrder);
+							setIsAscending(!isAscending);
+							handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
 						}}
-						content={<AscendingIcon className='buttonIcon' descendingOrder={descendingOrder} />}
+						content={<AscendingIcon className='buttonIcon' isAscending={isAscending} />}
 					/>
 				</div>
 			</div>

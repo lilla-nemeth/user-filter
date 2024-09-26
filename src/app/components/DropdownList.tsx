@@ -1,4 +1,4 @@
-import { listRequiredCategories, capitalizeString, handleCardSort } from '@/app/utils/helpers';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSort } from '@/app/utils/helpers';
 import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {
@@ -10,7 +10,8 @@ function DropdownList(props: any) {
 		acceptedCategories,
 		setSortCategoryName,
 		setUserAPIData,
-		setDescendingOrder,
+		isAscending,
+		setIsAscending,
 	} = props;
 
 	return data.map((el: any) => {
@@ -22,11 +23,11 @@ function DropdownList(props: any) {
 							key={uuidv4()}
 							className={dropdownItemClassName}
 							onClick={() => {
-								// filter function to show only required categories
+								// filter categories to show only required ones
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
-								handleCardSort(data, category, setUserAPIData);
-								setDescendingOrder(false);
+								setIsAscending(isAscending);
+								handleCardSort(sortUserCards, data, category, isAscending, setUserAPIData);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}

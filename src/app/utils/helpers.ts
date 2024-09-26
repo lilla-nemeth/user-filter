@@ -23,8 +23,8 @@ const listRequiredCategories = (key: string, stringArray: string[], callback: (s
 	return '';
 };
 
-const handleCardSort = (userData: dataTypes.User[], category: string, stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>): void => {
-	const sortedUserData = [...userData].sort((a, b) => {
+const sortUserCards = (userData: dataTypes.User[], category: string, isAscending: boolean = true): dataTypes.User[] => {
+	return [...userData].sort((a, b) => {
 		let valueA: string | undefined;
 		let valueB: string | undefined;
 
@@ -44,17 +44,26 @@ const handleCardSort = (userData: dataTypes.User[], category: string, stateSette
 		}
 
 		if (valueA > valueB) {
-			return 1;
+			return isAscending ? 1 : -1;
 		}
 
 		if (valueA < valueB) {
-			return -1;
+			return isAscending ? -1 : 1;
 		}
 
 		return 0;
 	});
+};
 
+const handleCardSort = (
+	sortFunction: (userData: dataTypes.User[], category: string, isAscending: boolean) => dataTypes.User[],
+	userData: dataTypes.User[],
+	category: string,
+	isAscending: boolean,
+	stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>
+): void => {
+	const sortedUserData = sortFunction(userData, category, isAscending);
 	stateSetter(sortedUserData);
 };
 
-export { handleInputChange, handleButtonClick, capitalizeString, listRequiredCategories, handleCardSort };
+export { handleInputChange, handleButtonClick, capitalizeString, listRequiredCategories, sortUserCards, handleCardSort };
