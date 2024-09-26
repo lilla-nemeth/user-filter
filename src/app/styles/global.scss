@@ -113,6 +113,7 @@ input {
 :root {
 	--primary-color: #{$primary-color};
 	--secondary-color: #{$secondary-color};
+	--grey: #{$grey};
 }
 
 html,
@@ -130,4 +131,60 @@ body {
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+}
+
+.sortContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.dropdownWrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.dropdown {
+	width: 300px;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.dropdownHead {
+	padding: 1rem;
+	background-color: $grey;
+}
+
+.dropdownList {
+	background-color: $secondary-color;
+	position: absolute;
+	width: inherit;
+}
+
+.dropdownItem {
+	padding: 1rem;
+	border-top: 1px solid $grey;
+}
+
+.dropdownItem:empty {
+	display: none;
+}
+
+.orderButtonWrapper {
+	display: flex;
+	justify-content: start;
+	flex-direction: column;
+}
+
+.orderButton {
+	background-color: $secondary-color;
+	padding: 0.4rem;
+	border-style: $input-border;
+	border-radius: $card-border-radius;
+	height: 3rem;
+	width: 3rem;
+	cursor: pointer;
+}
+
+.buttonIcon {
+	fill: $grey;
 }

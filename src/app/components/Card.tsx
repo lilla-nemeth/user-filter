@@ -1,16 +1,16 @@
 function Card(props: any) {
-	const { className, user } = props;
+	const { cardClassName, categoryClassName, valueClassName, user } = props;
 
 	return (
-		<ul className={className} key={user.id} style={{ minWidth: '400px', margin: '30px', padding: '10px', display: 'flex' }}>
-			<ul style={{ display: 'flex', width: '30%', flexDirection: 'column', color: 'green' }}>
+		<ul className={cardClassName} key={user.id}>
+			<ul className={categoryClassName}>
 				<li>Name:</li>
 				<li>Email:</li>
 				<li>Phone:</li>
 				<li>Website:</li>
 				<li>Address:</li>
 			</ul>
-			<ul style={{ display: 'flex', width: '70%', flexDirection: 'column', flex: '1' }}>
+			<ul className={valueClassName}>
 				<li>{user.name}</li>
 				<li>{user.email}</li>
 				<li>{user.phone}</li>

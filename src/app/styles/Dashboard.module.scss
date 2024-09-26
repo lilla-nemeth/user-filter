@@ -1,7 +1,47 @@
 @import './variables';
 
+.pageTitle {
+	display: flex;
+	justify-content: center;
+	padding: 40px;
+	font-size: 40px;
+}
+.cardContainer {
+	display: flex;
+	justify-content: center;
+}
+.cardWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
 .card {
 	background-color: $secondary-color;
+	border-radius: $card-border-radius;
+	padding: $card-padding;
+	min-width: 400px;
+	margin: 30px;
+	display: flex;
+}
+
+.cardCategories {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+	color: green;
+}
+
+.cardValues {
+	display: flex;
+	color: $font-color;
+	width: 70%;
+	flex-direction: column;
+}
+
+.searchBox {
+	display: flex;
+	padding: 40px;
+	justify-content: center;
 }
 
 .searchInput,
