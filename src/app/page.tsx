@@ -106,7 +106,7 @@ export default function Dashboard() {
 			<div className='sortContainer'>
 				<div className='dropdownWrapper'>
 					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortText} onClick={handleDisplay}>
-						<DropdownElement dropdownElementClassName='dropdownElement' display={display} text={sortCategory} onClick={handleTextChange} />
+						<DropdownElement dropdownElementClassName='dropdownElement' display={display} data={userAPIData} onClick={handleTextChange} />
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>
