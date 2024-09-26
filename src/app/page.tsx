@@ -16,6 +16,7 @@ import { handleInputChange, handleButtonClick } from './utils/helpers';
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownElement from './components/DropdownElement';
+import AscendingIcon from './components/icons/AscendingIcon';
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
@@ -75,14 +76,19 @@ export default function Dashboard() {
 				<Button
 					className={styles.searchButton}
 					type={'submit'}
-					text={'Search'}
+					content={'Search'}
 					onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 				/>
 			</div>
-			<div>
-				<Dropdown className='dropdown' text={'Dropdown head'}>
-					<DropdownElement className='dropdownElement' text={'Dropdown element'} />
-				</Dropdown>
+			<div className='sortContainer'>
+				<div className='dropdownWrapper'>
+					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={'Dropdown head'}>
+						<DropdownElement className='dropdownElement' text={'Dropdown element'} />
+					</Dropdown>
+				</div>
+				<div className='orderButtonWrapper'>
+					<Button className='orderButton' content={<AscendingIcon className='buttonIcon' />} />
+				</div>
 			</div>
 			<div className={styles.cardContainer}>
 				<div className={styles.cardWrapper}>

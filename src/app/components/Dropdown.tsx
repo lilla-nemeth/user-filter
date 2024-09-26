@@ -1,9 +1,9 @@
 function Dropdown(props: any) {
-	const { className, text } = props;
+	const { dropdownClassName, dropdownHeadClassName, text } = props;
 
 	return (
-		<div className={className}>
-			{text}
+		<div className={dropdownClassName}>
+			<div className={dropdownHeadClassName}>{text}</div>
 			{props.children}
 		</div>
 	);
