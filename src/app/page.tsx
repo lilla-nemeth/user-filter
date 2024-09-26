@@ -84,30 +84,32 @@ export default function Dashboard() {
 					<DropdownElement className='dropdownElement' text={'Dropdown element'} />
 				</Dropdown>
 			</div>
-			<div className={styles.cardWrapper}>
-				{search.length > 1
-					? filteredUserData.map((user: any) => {
-							return (
-								<Card
-									cardClassName={styles.card}
-									valueClassName={styles.cardValues}
-									categoryClassName={styles.cardCategories}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })
-					: userData.map((user: any) => {
-							return (
-								<Card
-									cardClassName={styles.card}
-									valueClassName={styles.cardValues}
-									categoryClassName={styles.cardCategories}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })}
+			<div className={styles.cardContainer}>
+				<div className={styles.cardWrapper}>
+					{search.length > 1
+						? filteredUserData.map((user: any) => {
+								return (
+									<Card
+										cardClassName={styles.card}
+										valueClassName={styles.cardValues}
+										categoryClassName={styles.cardCategories}
+										user={user}
+										key={user.id}
+									/>
+								);
+						  })
+						: userData.map((user: any) => {
+								return (
+									<Card
+										cardClassName={styles.card}
+										valueClassName={styles.cardValues}
+										categoryClassName={styles.cardCategories}
+										user={user}
+										key={user.id}
+									/>
+								);
+						  })}
+				</div>
 			</div>
 		</div>
 	);
