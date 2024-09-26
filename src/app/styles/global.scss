@@ -146,6 +146,7 @@ body {
 .dropdown {
 	width: 300px;
 	z-index: 1;
+	cursor: pointer;
 }
 
 .dropdownHead {
@@ -156,6 +157,10 @@ body {
 .dropdownElement {
 	padding: 1rem;
 	background-color: $secondary-color;
+	position: absolute;
+	width: inherit;
+	/* temporary border for visibility ->*/
+	border: 1px solid grey;
 }
 
 .orderButtonWrapper {

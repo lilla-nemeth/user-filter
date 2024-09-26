@@ -18,11 +18,18 @@ import * as dataTypes from '@/types/data';
 import DropdownElement from './components/DropdownElement';
 import AscendingIcon from './components/icons/AscendingIcon';
 
+import { SORT_BY } from '@/types/constants';
+
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
 	const [userData, setUserData] = useState<dataTypes.User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
+	const [display, setDisplay] = useState<string>('none');
+
+	const [sortText, setSortText] = useState<any>(SORT_BY);
+	// temporary hard coded category
+	const [sortCategory, setSortCategory] = useState<any>('Name');
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -53,6 +60,22 @@ export default function Dashboard() {
 		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
 	});
 
+	const handleDisplay = () => {
+		if (display === 'none') {
+			setDisplay('block');
+
+			if (sortText !== SORT_BY) {
+				setSortText(SORT_BY);
+			}
+		} else {
+			setDisplay('none');
+		}
+	};
+
+	const handleTextChange = () => {
+		setSortText(sortCategory);
+	};
+
 	return (
 		<div>
 			<div className={styles.pageTitle}>Users</div>
@@ -82,8 +105,8 @@ export default function Dashboard() {
 			</div>
 			<div className='sortContainer'>
 				<div className='dropdownWrapper'>
-					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={'Dropdown head'}>
-						<DropdownElement className='dropdownElement' text={'Dropdown element'} />
+					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortText} onClick={handleDisplay}>
+						<DropdownElement dropdownElementClassName='dropdownElement' display={display} text={sortCategory} onClick={handleTextChange} />
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>
