@@ -11,30 +11,44 @@ const handleButtonClick = (stateSetter: Dispatch<SetStateAction<dataTypes.User[]
 	stateSetter(filteredData);
 };
 
-const listRequiredCategories = (key: string, stringArray: string[]): string => {
+// Keeping capitalizeString as a separate function, make it reusable everywhere
+const capitalizeString = (string: string): string => {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const listRequiredCategories = (key: string, stringArray: string[], callback: (str: string) => string): string => {
 	if (stringArray.includes(key)) {
-		return key.charAt(0).toUpperCase() + key.slice(1);
+		return callback(key);
 	}
 	return '';
 };
 
 const handleCardSort = (userData: dataTypes.User[], category: string, stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>): void => {
 	const sortedUserData = [...userData].sort((a, b) => {
-		const string = Object.keys(a)
-			.filter((el) => el === 'name')
-			.join('');
-		const capitalizedString = string.charAt(0).toUpperCase() + string.slice(1);
+		let valueA: string | undefined;
+		let valueB: string | undefined;
 
-		if (category.localeCompare(capitalizedString) === 0) {
-			if (a.name > b.name) {
-				return 1;
-			}
+		// This switch statement can be extended later with other categories,
+		// like username, website, etc.
+		switch (category) {
+			case 'Name':
+				valueA = a.name;
+				valueB = b.name;
+				break;
+			case 'Email':
+				valueA = a.email;
+				valueB = b.email;
+				break;
+			default:
+				return 0;
+		}
 
-			if (a.name < b.name) {
-				return -1;
-			}
+		if (valueA > valueB) {
+			return 1;
+		}
 
-			return 0;
+		if (valueA < valueB) {
+			return -1;
 		}
 
 		return 0;
@@ -43,4 +57,4 @@ const handleCardSort = (userData: dataTypes.User[], category: string, stateSette
 	stateSetter(sortedUserData);
 };
 
-export { handleInputChange, handleButtonClick, listRequiredCategories, handleCardSort };
+export { handleInputChange, handleButtonClick, capitalizeString, listRequiredCategories, handleCardSort };

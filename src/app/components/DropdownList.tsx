@@ -1,4 +1,4 @@
-import { listRequiredCategories, handleCardSort } from '@/app/utils/helpers';
+import { listRequiredCategories, capitalizeString, handleCardSort } from '@/app/utils/helpers';
 import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {
@@ -14,12 +14,12 @@ function DropdownList(props: any) {
 							className={dropdownItemClassName}
 							onClick={() => {
 								// filter function to show only required categories
-								const category: string = listRequiredCategories(item, acceptedCategories);
+								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								handleCardSort(data, category, setUserAPIData);
 							}}
 						>
-							{listRequiredCategories(item, acceptedCategories)}
+							{listRequiredCategories(item, acceptedCategories, capitalizeString)}
 						</div>
 					);
 				})}
