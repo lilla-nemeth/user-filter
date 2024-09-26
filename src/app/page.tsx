@@ -15,7 +15,7 @@ import { handleInputChange, handleButtonClick } from './utils/helpers';
 
 // Types
 import * as dataTypes from '@/types/data';
-import DropdownElement from './components/DropdownElement';
+import DropdownList from './components/DropdownList';
 import AscendingIcon from './components/icons/AscendingIcon';
 
 import { SORT_BY } from '@/types/constants';
@@ -30,6 +30,8 @@ export default function Dashboard() {
 	const [sortText, setSortText] = useState<any>(SORT_BY);
 	// temporary hard coded category
 	const [sortCategory, setSortCategory] = useState<any>('Name');
+
+	const acceptedSortCategories = ['name', 'email'];
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -106,7 +108,14 @@ export default function Dashboard() {
 			<div className='sortContainer'>
 				<div className='dropdownWrapper'>
 					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortText} onClick={handleDisplay}>
-						<DropdownElement dropdownElementClassName='dropdownElement' display={display} data={userAPIData} onClick={handleTextChange} />
+						<DropdownList
+							dropdownListClassName='dropdownList'
+							dropdownItemClassName='dropdownItem'
+							display={display}
+							data={userAPIData}
+							onClick={handleTextChange}
+							acceptedCategories={acceptedSortCategories}
+						/>
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>

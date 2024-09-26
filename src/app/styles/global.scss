@@ -154,13 +154,19 @@ body {
 	background-color: $grey;
 }
 
-.dropdownElement {
-	padding: 1rem;
+.dropdownList {
 	background-color: $secondary-color;
 	position: absolute;
 	width: inherit;
-	/* temporary border for visibility ->*/
-	border: 1px solid grey;
+}
+
+.dropdownItem {
+	padding: 1rem;
+	border-top: 1px solid $grey;
+}
+
+.dropdownItem:empty {
+	display: none;
 }
 
 .orderButtonWrapper {
