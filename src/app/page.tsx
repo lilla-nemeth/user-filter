@@ -27,6 +27,7 @@ export default function Dashboard() {
 	const [error, setError] = useState<string | null>(null);
 	const [display, setDisplay] = useState<string>('none');
 	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
+	const [descendingOrder, setDescendingOrder] = useState<boolean>(false);
 
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
@@ -109,11 +110,18 @@ export default function Dashboard() {
 							setSortCategoryName={setSortCategoryName}
 							acceptedCategories={acceptedSortCategories}
 							setUserAPIData={setUserAPIData}
+							setDescendingOrder={setDescendingOrder}
 						/>
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>
-					<Button className='orderButton' content={<AscendingIcon className='buttonIcon' />} />
+					<Button
+						className='orderButton'
+						onClick={() => {
+							setDescendingOrder(!descendingOrder);
+						}}
+						content={<AscendingIcon className='buttonIcon' descendingOrder={descendingOrder} />}
+					/>
 				</div>
 			</div>
 			<div className={styles.cardContainer}>

@@ -2,7 +2,16 @@ import { listRequiredCategories, capitalizeString, handleCardSort } from '@/app/
 import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {
-	const { dropdownListClassName, dropdownItemClassName, display, data, acceptedCategories, setSortCategoryName, setUserAPIData } = props;
+	const {
+		dropdownListClassName,
+		dropdownItemClassName,
+		display,
+		data,
+		acceptedCategories,
+		setSortCategoryName,
+		setUserAPIData,
+		setDescendingOrder,
+	} = props;
 
 	return data.map((el: any) => {
 		return (
@@ -17,6 +26,7 @@ function DropdownList(props: any) {
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								handleCardSort(data, category, setUserAPIData);
+								setDescendingOrder(false);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}
