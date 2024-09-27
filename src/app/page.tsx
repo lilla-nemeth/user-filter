@@ -109,6 +109,7 @@ export default function Dashboard() {
 						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 					/>
 				</div>
+				<div className={styles.sortContainer}>
 				<div ref={dropdownRef} className={styles.dropdownWrapper}>
 					<Dropdown dropdownClass={styles.dropdown} dropdownHeadClass={styles.dropdownHead} text={sortCategoryName} onClick={handleDisplay}>
 						{isOpen && (
@@ -134,6 +135,7 @@ export default function Dashboard() {
 						}}
 						content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 					/>
+				</div>
 				</div>
 			</div>
 			<div className={styles.cardContainer}>

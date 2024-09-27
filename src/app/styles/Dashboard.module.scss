@@ -58,6 +58,7 @@
 }
 
 .searchWrapper {
+	display: flex;
 	width: 100%;
 }
 
@@ -86,6 +87,10 @@
 	color: $black;
 }
 
+.sortContainer {
+	display: flex;
+}
+
 .dropdownWrapper {
 	display: flex;
 	justify-content: center;
@@ -94,9 +99,10 @@
 
 .dropdown {
 	width: 300px;
-	z-index: 1;
+	z-index: 1000;
 	cursor: pointer;
 	color: $tertiary-color;
+	position: relative;
 }
 
 .dropdownHead {
@@ -159,6 +165,42 @@
 
 // XS devices - Max. 575px
 @media (max-width: $xs-device-min) {
+	.filterContainer {
+		padding: unset;
+		margin: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sortContainer {
+		padding: 0.5rem 0;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 0;
+	}
+
+	.searchWrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.dropdown {
+		flex: 1;
+		width: unset;
+	}
+
+	.dropdownWrapper {
+		padding: unset;
+		justify-content: unset;
+		flex: 1;
+	}
+
+	.dropdownList {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		border-radius: 0.5rem;
+	}
 }
 
 // S devices - Min. 576px and Max. 767px
