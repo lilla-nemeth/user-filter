@@ -17,6 +17,7 @@
 	min-width: 400px;
 	margin: $card-margin;
 	display: flex;
+	box-shadow: $box-shadow;
 }
 
 .cardCategories {
@@ -60,6 +61,7 @@
 .searchWrapper {
 	display: flex;
 	width: 100%;
+	box-shadow: $box-shadow;
 }
 
 .searchInput,
@@ -94,7 +96,8 @@
 .dropdownWrapper {
 	display: flex;
 	justify-content: center;
-	padding: 0 1rem 0 1rem;
+	margin: 0 1rem 0 1rem;
+	box-shadow: $box-shadow;
 }
 
 .dropdown {
@@ -139,6 +142,7 @@
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
+	box-shadow: $box-shadow;
 }
 
 .orderButton {
@@ -192,6 +196,7 @@
 	.dropdownWrapper {
 		padding: unset;
 		justify-content: unset;
+		margin: unset;
 		flex: 1;
 	}
 
