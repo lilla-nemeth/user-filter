@@ -109,12 +109,12 @@ export default function Dashboard() {
 						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 					/>
 				</div>
-				<div ref={dropdownRef} className='dropdownWrapper'>
-					<Dropdown dropdownClass='dropdown' dropdownHeadClass='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
+				<div ref={dropdownRef} className={styles.dropdownWrapper}>
+					<Dropdown dropdownClass={styles.dropdown} dropdownHeadClass={styles.dropdownHead} text={sortCategoryName} onClick={handleDisplay}>
 						{isOpen && (
 							<DropdownList
-								dropdownListClass='dropdownList'
-								dropdownItemClass='dropdownItem'
+								dropdownListClass={styles.dropdownList}
+								dropdownItemClass={styles.dropdownItem}
 								data={userAPIData}
 								setSortCategoryName={setSortCategoryName}
 								acceptedCategories={acceptedSortCategories}
@@ -125,14 +125,14 @@ export default function Dashboard() {
 						)}
 					</Dropdown>
 				</div>
-				<div className='orderButtonWrapper'>
+				<div className={styles.orderButtonWrapper}>
 					<Button
-						className='orderButton'
+						className={styles.orderButton}
 						onClick={() => {
 							setIsAscending(!isAscending);
 							handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
 						}}
-						content={<AscendingIcon className='buttonIcon' isAscending={isAscending} />}
+						content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 					/>
 				</div>
 			</div>
