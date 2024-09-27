@@ -69,7 +69,7 @@ export default function Dashboard() {
 	const handleDisplay = () => {
 		setIsOpen(!isOpen);
 
-		if (isOpen === true) {
+		if (isOpen === false) {
 			if (sortCategoryName !== SORT_BY) {
 				setSortCategoryName(SORT_BY);
 			}
