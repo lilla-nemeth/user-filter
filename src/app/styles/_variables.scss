@@ -1,4 +1,4 @@
-// Color variables
+/* Color variables */
 $primary-color: rgba(127, 198, 220, 1);
 $secondary-color: rgba(195, 225, 235, 1);
 $tertiary-color: rgb(79, 157, 181);
@@ -6,19 +6,36 @@ $white: rgb(255, 255, 255);
 $black: rgb(28, 28, 28);
 $grey: rgba(124, 124, 124, 1);
 
-// Box shadow
+/* Box shadow */
 $box-shadow: 1px 64px 67px -29px rgba(0, 0, 0, 0.9);
 
-// Font variables
+/* Font variables */
 $base-font-size: 1rem;
 $font-dela-gothic-one: 'Dela Gothic One', sans-serif;
 
-// Card variables
+/* Card variables */
 $card-padding: 3rem;
 $card-border-radius: 3rem;
 $card-margin: 1rem;
 
-// Input variables
+/* Input variables */
 $input-padding: 1.2rem;
 $input-width: 50%;
 $input-border: none;
+
+/* Device breakpoints */
+// Phones
+$xs-device-min: 575px;
+$s-device-min: 576px;
+$s-device-max: 767px;
+
+// Tablets and small desktops
+$m-device-min: 768px;
+$m-device-max: 991px;
+
+// Desktops
+$l-device-min: 992px;
+$l-device-max: 1199px;
+
+// Large Desktops
+$xl-device-min: 1200px;
