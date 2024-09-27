@@ -4,15 +4,15 @@
 	display: flex;
 	justify-content: center;
 }
+
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
 }
 
 .card {
-	background-color: $secondary-color;
+	background-color: $white;
 	border-radius: $card-border-radius;
-	padding: $card-padding;
 	min-width: 400px;
 	margin: $card-margin;
 	display: flex;
@@ -22,7 +22,10 @@
 	display: flex;
 	width: 30%;
 	flex-direction: column;
-	color: green;
+	border-radius: 3rem 0 0 3rem;
+	background-color: $secondary-color;
+	color: $black;
+	padding: 2rem;
 }
 
 .cardValues {
@@ -30,6 +33,19 @@
 	color: $black;
 	width: 70%;
 	flex-direction: column;
+	padding: 2rem;
+}
+
+.cardCategoryFullName,
+.cardFullName {
+	padding: 0 0 1rem 0;
+	vertical-align: bottom;
+	line-height: 2rem;
+}
+
+.cardFullName {
+	font-size: 1.25rem;
+	font-family: $font-dela-gothic-one;
 }
 
 .filterContainer {
@@ -45,18 +61,25 @@
 
 .searchInput,
 .searchButton {
-	padding: $input-padding;
 	border: $input-border;
 }
 
 .searchInput {
-	// width: $input-width;
-	width: 80%;
+	width: 89%;
+	padding: $input-padding;
 	border-radius: 0.5rem 0 0 0.5rem;
 }
 
 .searchButton {
 	border-radius: 0 0.5rem 0.5rem 0;
 	width: 7em;
+	padding: 1.1rem;
+	background-color: $secondary-color;
+	font-size: 1rem;
+	color: $tertiary-color;
 	cursor: pointer;
+}
+
+.searchButton:hover {
+	color: $black;
 }

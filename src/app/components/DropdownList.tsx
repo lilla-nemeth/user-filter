@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {
 	const {
-		dropdownListClassName,
-		dropdownItemClassName,
+		dropdownListClass,
+		dropdownItemClass,
 		display,
 		data,
 		acceptedCategories,
@@ -16,12 +16,12 @@ function DropdownList(props: any) {
 
 	return data.map((el: any) => {
 		return (
-			<div key={el.id} className={dropdownListClassName} style={{ display: display }}>
+			<div key={el.id} className={dropdownListClass} style={{ display: display }}>
 				{Object.keys(el).map((item) => {
 					return (
 						<div
 							key={uuidv4()}
-							className={dropdownItemClassName}
+							className={dropdownItemClass}
 							onClick={() => {
 								// filter categories to show only required ones
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);

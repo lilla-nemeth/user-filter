@@ -110,23 +110,23 @@ input {
 }
 // SCSS (CSS) Reset - Ends
 
-// Usings style variables
-:root {
-	--primary-color: #{$primary-color};
-	--secondary-color: #{$secondary-color};
-	--grey: #{$grey};
-	--font-dela-gothic-one: 'Dela Gothic One', sans-serif;
-	--font-anton: 'Anton', sans-serif;
-}
-
 html,
 body {
 	background-color: $primary-color;
 	color: $black;
 }
 
-.dela-gothic {
-	font-family: var(--font-dela-gothic-one, 'Dela Gothic One', sans-serif);
+textarea:focus,
+input:focus {
+	outline: none;
+}
+
+body {
+	overflow-y: scroll;
+}
+
+.dela-gothic-one {
+	font-family: $font-dela-gothic-one;
 }
 
 h1 {
@@ -138,7 +138,7 @@ h1 {
 }
 
 .errorCard {
-	background-color: $secondary-color;
+	background-color: $white;
 	color: $black;
 	padding: $card-padding;
 	position: fixed;
@@ -158,16 +158,22 @@ h1 {
 	width: 300px;
 	z-index: 1;
 	cursor: pointer;
+	color: $tertiary-color;
 }
 
 .dropdownHead {
 	padding: $input-padding;
-	background-color: $grey;
+	background-color: $secondary-color;
 	border-radius: 0.5rem;
 }
 
+.dropdownHead:hover,
+.dropdownItem:hover {
+	color: $black;
+}
+
 .dropdownList {
-	background-color: $secondary-color;
+	background-color: $white;
 	position: absolute;
 	width: inherit;
 	border-radius: 0.5rem;
@@ -178,7 +184,7 @@ h1 {
 }
 
 .dropdownItem:hover {
-	background-color: $grey;
+	border-radius: 0.5rem;
 }
 
 .dropdownItem:empty {
@@ -195,12 +201,22 @@ h1 {
 	background-color: $secondary-color;
 	padding: 0.8rem;
 	border-style: $input-border;
-	border-radius: $card-border-radius;
+	border-radius: 0.5rem;
 	height: 3.4rem;
 	width: 3.4rem;
 	cursor: pointer;
 }
 
+.orderButton:hover {
+	.buttonIcon {
+		fill: $black;
+	}
+}
+
 .buttonIcon {
-	fill: $grey;
+	fill: $tertiary-color;
+}
+
+td {
+	margin: 0.25rem;
 }

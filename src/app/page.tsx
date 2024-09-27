@@ -74,7 +74,7 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<h1 className='dela-gothic'>Users</h1>
+			<h1 className='dela-gothic-one'>Users</h1>
 			<div className={styles.filterContainer}>
 				<div className={styles.searchWrapper}>
 					<Input
@@ -100,10 +100,10 @@ export default function Dashboard() {
 					/>
 				</div>
 				<div className='dropdownWrapper'>
-					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
+					<Dropdown dropdownClass='dropdown' dropdownHeadClass='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
 						<DropdownList
-							dropdownListClassName='dropdownList'
-							dropdownItemClassName='dropdownItem'
+							dropdownListClass='dropdownList'
+							dropdownItemClass='dropdownItem'
 							display={display}
 							data={userAPIData}
 							setSortCategoryName={setSortCategoryName}
@@ -131,9 +131,11 @@ export default function Dashboard() {
 						? filteredUserData.map((user: any) => {
 								return (
 									<Card
-										cardClassName={styles.card}
-										valueClassName={styles.cardValues}
-										categoryClassName={styles.cardCategories}
+										cardClass={styles.card}
+										valueClass={styles.cardValues}
+										categoryClass={styles.cardCategories}
+										fullNameClass={styles.cardFullName}
+										cardCategoryFullName={styles.cardCategoryFullName}
 										user={user}
 										key={user.id}
 									/>
@@ -142,9 +144,11 @@ export default function Dashboard() {
 						: userAPIData.map((user: any) => {
 								return (
 									<Card
-										cardClassName={styles.card}
-										valueClassName={styles.cardValues}
-										categoryClassName={styles.cardCategories}
+										cardClass={styles.card}
+										valueClass={styles.cardValues}
+										categoryClass={styles.cardCategories}
+										fullNameClass={styles.cardFullName}
+										cardCategoryFullName={styles.cardCategoryFullName}
 										user={user}
 										key={user.id}
 									/>
