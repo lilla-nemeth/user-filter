@@ -1,17 +1,24 @@
 // Color variables
 $primary-color: rgba(127, 198, 220, 1);
-$secondary-color: rgba(235, 235, 235, 1);
-$grey: rgb(124, 124, 124);
+$secondary-color: rgba(195, 225, 235, 1);
+$tertiary-color: rgb(79, 157, 181);
+$white: rgb(255, 255, 255);
+$black: rgb(28, 28, 28);
+$grey: rgba(124, 124, 124, 1);
+
+// Box shadow
+$box-shadow: 1px 64px 67px -29px rgba(0, 0, 0, 0.9);
 
 // Font variables
 $base-font-size: 1rem;
-$font-color: rgba(34, 34, 34, 1);
+$font-dela-gothic-one: 'Dela Gothic One', sans-serif;
 
 // Card variables
 $card-padding: 3rem;
 $card-border-radius: 3rem;
+$card-margin: 1rem;
 
 // Input variables
-$input-padding: 1rem;
+$input-padding: 1.2rem;
 $input-width: 50%;
 $input-border: none;

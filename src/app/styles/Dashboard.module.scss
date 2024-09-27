@@ -1,26 +1,20 @@
 @import './variables';
 
-.pageTitle {
-	display: flex;
-	justify-content: center;
-	padding: 40px;
-	font-size: 40px;
-}
 .cardContainer {
 	display: flex;
 	justify-content: center;
 }
+
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
 }
 
 .card {
-	background-color: $secondary-color;
+	background-color: $white;
 	border-radius: $card-border-radius;
-	padding: $card-padding;
 	min-width: 400px;
-	margin: 30px;
+	margin: $card-margin;
 	display: flex;
 }
 
@@ -28,28 +22,64 @@
 	display: flex;
 	width: 30%;
 	flex-direction: column;
-	color: green;
+	border-radius: 3rem 0 0 3rem;
+	background-color: $secondary-color;
+	color: $black;
+	padding: 2rem;
 }
 
 .cardValues {
 	display: flex;
-	color: $font-color;
+	color: $black;
 	width: 70%;
 	flex-direction: column;
+	padding: 2rem;
 }
 
-.searchBox {
+.cardCategoryFullName,
+.cardFullName {
+	padding: 0 0 1rem 0;
+	vertical-align: bottom;
+	line-height: 2rem;
+}
+
+.cardFullName {
+	font-size: 1.25rem;
+	font-family: $font-dela-gothic-one;
+}
+
+.filterContainer {
 	display: flex;
 	padding: 40px;
-	justify-content: center;
+	justify-content: space-evenly;
+	margin: 0 7em 0 7em;
+}
+
+.searchWrapper {
+	width: 100%;
 }
 
 .searchInput,
 .searchButton {
-	padding: $input-padding;
 	border: $input-border;
 }
 
 .searchInput {
-	width: $input-width;
+	width: 89%;
+	padding: $input-padding;
+	border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.searchButton {
+	border-radius: 0 0.5rem 0.5rem 0;
+	width: 7em;
+	padding: 1.1rem;
+	background-color: $secondary-color;
+	font-size: 1rem;
+	color: $tertiary-color;
+	cursor: pointer;
+}
+
+.searchButton:hover {
+	color: $black;
 }

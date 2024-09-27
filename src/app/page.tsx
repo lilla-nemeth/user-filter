@@ -1,23 +1,19 @@
 'use client';
-import { ChangeEvent, useEffect, useState } from 'react';
-
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 // Styles
 import styles from '@/app/styles/Dashboard.module.scss';
-
 // Components
 import Input from './components/Input';
 import Button from './components/Button';
 import Dropdown from './components/Dropdown';
 import Card from './components/Card';
-
 // Helpers
 import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helpers';
-
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownList from './components/DropdownList';
 import AscendingIcon from './components/icons/AscendingIcon';
-
+// Constants
 import { SORT_BY } from '@/types/constants';
 
 export default function Dashboard() {
@@ -25,10 +21,10 @@ export default function Dashboard() {
 	const [userAPIData, setUserAPIData] = useState<dataTypes.User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
-	const [display, setDisplay] = useState<string>('none');
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
 	const [isAscending, setIsAscending] = useState<boolean>(true);
-
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
 	useEffect(() => {
@@ -40,16 +36,26 @@ export default function Dashboard() {
 					throw new Error('Something went wrong, please come back later.');
 				}
 				const users: dataTypes.User[] = await res.json();
-
 				setUserAPIData(users);
 				setFilteredUserData(userAPIData);
 			} catch (err) {
 				setError((err as Error).message);
 			}
 		};
-
 		fetchUsers();
 	}, []);
+
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen]);
 
 	if (error) {
 		return <div className='errorCard'>{error}</div>;
@@ -61,58 +67,62 @@ export default function Dashboard() {
 	});
 
 	const handleDisplay = () => {
-		if (display === 'none') {
-			setDisplay('block');
+		setIsOpen(!isOpen);
 
+		if (isOpen === false) {
 			if (sortCategoryName !== SORT_BY) {
 				setSortCategoryName(SORT_BY);
 			}
-		} else {
-			setDisplay('none');
+		}
+	};
+
+	const handleClickOutside = (e: MouseEvent) => {
+		if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+			setIsOpen(false);
 		}
 	};
 
 	return (
 		<div>
-			<div className={styles.pageTitle}>Users</div>
-			<div className={styles.searchBox}>
-				<Input
-					className={styles.searchInput}
-					htmlFor={'card-search'}
-					type={'search'}
-					name={'search'}
-					value={search}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => {
-						handleInputChange(setSearch, e);
-
-						if (search !== '') {
-							setFilteredUserData(filteredData);
-						} else {
-							setFilteredUserData(userAPIData);
-						}
-					}}
-				/>
-				<Button
-					className={styles.searchButton}
-					type={'submit'}
-					content={'Search'}
-					onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
-				/>
-			</div>
-			<div className='sortContainer'>
-				<div className='dropdownWrapper'>
-					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
-						<DropdownList
-							dropdownListClassName='dropdownList'
-							dropdownItemClassName='dropdownItem'
-							display={display}
-							data={userAPIData}
-							setSortCategoryName={setSortCategoryName}
-							acceptedCategories={acceptedSortCategories}
-							setUserAPIData={setUserAPIData}
-							isAscending={isAscending}
-							setIsAscending={setIsAscending}
-						/>
+			<h1 className='dela-gothic-one'>Users</h1>
+			<div className={styles.filterContainer}>
+				<div className={styles.searchWrapper}>
+					<Input
+						className={styles.searchInput}
+						htmlFor={'card-search'}
+						type={'search'}
+						name={'search'}
+						value={search}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							handleInputChange(setSearch, e);
+							if (search !== '') {
+								setFilteredUserData(filteredData);
+							} else {
+								setFilteredUserData(userAPIData);
+							}
+						}}
+					/>
+					<Button
+						className={styles.searchButton}
+						type={'submit'}
+						content={'Search'}
+						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
+					/>
+				</div>
+				<div ref={dropdownRef} className='dropdownWrapper'>
+					<Dropdown dropdownClass='dropdown' dropdownHeadClass='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
+						{isOpen && (
+							<DropdownList
+								dropdownListClass='dropdownList'
+								dropdownItemClass='dropdownItem'
+								data={userAPIData}
+								setSortCategoryName={setSortCategoryName}
+								acceptedCategories={acceptedSortCategories}
+								setUserAPIData={setUserAPIData}
+								isAscending={isAscending}
+								setIsAscending={setIsAscending}
+							/>
+						)}
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>
@@ -132,9 +142,11 @@ export default function Dashboard() {
 						? filteredUserData.map((user: any) => {
 								return (
 									<Card
-										cardClassName={styles.card}
-										valueClassName={styles.cardValues}
-										categoryClassName={styles.cardCategories}
+										cardClass={styles.card}
+										valueClass={styles.cardValues}
+										categoryClass={styles.cardCategories}
+										fullNameClass={styles.cardFullName}
+										cardCategoryFullName={styles.cardCategoryFullName}
 										user={user}
 										key={user.id}
 									/>
@@ -143,9 +155,11 @@ export default function Dashboard() {
 						: userAPIData.map((user: any) => {
 								return (
 									<Card
-										cardClassName={styles.card}
-										valueClassName={styles.cardValues}
-										categoryClassName={styles.cardCategories}
+										cardClass={styles.card}
+										valueClass={styles.cardValues}
+										categoryClass={styles.cardCategories}
+										fullNameClass={styles.cardFullName}
+										cardCategoryFullName={styles.cardCategoryFullName}
 										user={user}
 										key={user.id}
 									/>

@@ -1,29 +1,30 @@
 function Card(props: any) {
-	const { cardClassName, categoryClassName, valueClassName, user } = props;
+	const { cardClass, categoryClass, valueClass, user, cardCategoryFullName, fullNameClass } = props;
 
 	return (
-		<ul className={cardClassName} key={user.id}>
-			<ul className={categoryClassName}>
-				<li>Name:</li>
-				<li>Email:</li>
-				<li>Phone:</li>
-				<li>Website:</li>
-				<li>Address:</li>
-			</ul>
-			<ul className={valueClassName}>
-				<li>{user.name}</li>
-				<li>{user.email}</li>
-				<li>{user.phone}</li>
-				<li>{user.website}</li>
-				<li>{user.address.street}</li>
-				<li>{user.address.suite}</li>
-				<li>{user.address.city}</li>
-				<li>{user.address.city}</li>
-				<li>{user.address.zipcode}</li>
-				<li>{user.address.geo.lat}</li>
-				<li>{user.address.geo.lng}</li>
-			</ul>
-		</ul>
+		<table className={cardClass} key={user.id}>
+			<tr className={categoryClass}>
+				<td className={cardCategoryFullName}>Name</td>
+				<td>Email</td>
+				<td>Phone</td>
+				<td>Website</td>
+				<td>Address</td>
+			</tr>
+			<tr className={valueClass}>
+				<td className={fullNameClass}>{user.name}</td>
+				<td>{user.email}</td>
+				<td>{user.phone}</td>
+				<td>{user.website}</td>
+				<td>{user.address.street}</td>
+				<td>{user.address.suite}</td>
+				<td>{user.address.city}</td>
+				<td>{user.address.city}</td>
+				<td>{user.address.zipcode}</td>
+				{/* I don't believe longitude and latitude should be visible */}
+				{/* <td>{user.address.geo.lat}</td>
+				<td>{user.address.geo.lng}</td> */}
+			</tr>
+		</table>
 	);
 }
 
