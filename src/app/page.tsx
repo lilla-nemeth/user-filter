@@ -74,32 +74,31 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<div className={styles.pageTitle}>Users</div>
-			<div className={styles.searchBox}>
-				<Input
-					className={styles.searchInput}
-					htmlFor={'card-search'}
-					type={'search'}
-					name={'search'}
-					value={search}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => {
-						handleInputChange(setSearch, e);
-
-						if (search !== '') {
-							setFilteredUserData(filteredData);
-						} else {
-							setFilteredUserData(userAPIData);
-						}
-					}}
-				/>
-				<Button
-					className={styles.searchButton}
-					type={'submit'}
-					content={'Search'}
-					onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
-				/>
-			</div>
-			<div className='sortContainer'>
+			<h1 className='dela-gothic'>Users</h1>
+			<div className={styles.filterContainer}>
+				<div className={styles.searchWrapper}>
+					<Input
+						className={styles.searchInput}
+						htmlFor={'card-search'}
+						type={'search'}
+						name={'search'}
+						value={search}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							handleInputChange(setSearch, e);
+							if (search !== '') {
+								setFilteredUserData(filteredData);
+							} else {
+								setFilteredUserData(userAPIData);
+							}
+						}}
+					/>
+					<Button
+						className={styles.searchButton}
+						type={'submit'}
+						content={'Search'}
+						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
+					/>
+				</div>
 				<div className='dropdownWrapper'>
 					<Dropdown dropdownClassName='dropdown' dropdownHeadClassName='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
 						<DropdownList

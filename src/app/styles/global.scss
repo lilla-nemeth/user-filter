@@ -1,4 +1,5 @@
 @import './variables';
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One:wght@400&display=swap');
 
 // SCSS (CSS) Reset - Starts
 *,
@@ -114,17 +115,31 @@ input {
 	--primary-color: #{$primary-color};
 	--secondary-color: #{$secondary-color};
 	--grey: #{$grey};
+	--font-dela-gothic-one: 'Dela Gothic One', sans-serif;
+	--font-anton: 'Anton', sans-serif;
 }
 
 html,
 body {
 	background-color: $primary-color;
-	color: $font-color;
+	color: $black;
+}
+
+.dela-gothic {
+	font-family: var(--font-dela-gothic-one, 'Dela Gothic One', sans-serif);
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+	padding: 40px;
+	font-size: 3rem;
+	color: $black;
 }
 
 .errorCard {
 	background-color: $secondary-color;
-	color: $font-color;
+	color: $black;
 	padding: $card-padding;
 	position: fixed;
 	border-radius: $card-border-radius;
@@ -133,14 +148,10 @@ body {
 	left: 50%;
 }
 
-.sortContainer {
-	display: flex;
-	justify-content: space-evenly;
-}
-
 .dropdownWrapper {
 	display: flex;
 	justify-content: center;
+	padding: 0 1rem 0 1rem;
 }
 
 .dropdown {
@@ -150,19 +161,24 @@ body {
 }
 
 .dropdownHead {
-	padding: 1rem;
+	padding: $input-padding;
 	background-color: $grey;
+	border-radius: 0.5rem;
 }
 
 .dropdownList {
 	background-color: $secondary-color;
 	position: absolute;
 	width: inherit;
+	border-radius: 0.5rem;
 }
 
 .dropdownItem {
-	padding: 1rem;
-	border-top: 1px solid $grey;
+	padding: $input-padding;
+}
+
+.dropdownItem:hover {
+	background-color: $grey;
 }
 
 .dropdownItem:empty {
@@ -171,17 +187,17 @@ body {
 
 .orderButtonWrapper {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	flex-direction: column;
 }
 
 .orderButton {
 	background-color: $secondary-color;
-	padding: 0.4rem;
+	padding: 0.8rem;
 	border-style: $input-border;
 	border-radius: $card-border-radius;
-	height: 3rem;
-	width: 3rem;
+	height: 3.4rem;
+	width: 3.4rem;
 	cursor: pointer;
 }
 

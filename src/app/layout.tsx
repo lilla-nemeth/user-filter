@@ -1,10 +1,18 @@
 import type { Metadata } from 'next';
 import '@/app/styles/global.scss';
+import { Dela_Gothic_One } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 
 export const metadata: Metadata = {
 	title: 'Users Dashboard',
 	description: 'Coding Assignment',
 };
+
+export const roboto = Roboto({
+	subsets: ['latin'],
+	weight: ['400'],
+	display: 'swap',
+});
 
 export default function RootLayout({
 	children,
@@ -13,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>{children}</body>
+			<body className={`${roboto.className} `}>{children}</body>
 		</html>
 	);
 }

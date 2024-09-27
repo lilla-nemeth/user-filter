@@ -1,11 +1,5 @@
 @import './variables';
 
-.pageTitle {
-	display: flex;
-	justify-content: center;
-	padding: 40px;
-	font-size: 40px;
-}
 .cardContainer {
 	display: flex;
 	justify-content: center;
@@ -20,7 +14,7 @@
 	border-radius: $card-border-radius;
 	padding: $card-padding;
 	min-width: 400px;
-	margin: 30px;
+	margin: $card-margin;
 	display: flex;
 }
 
@@ -33,15 +27,20 @@
 
 .cardValues {
 	display: flex;
-	color: $font-color;
+	color: $black;
 	width: 70%;
 	flex-direction: column;
 }
 
-.searchBox {
+.filterContainer {
 	display: flex;
 	padding: 40px;
-	justify-content: center;
+	justify-content: space-evenly;
+	margin: 0 7em 0 7em;
+}
+
+.searchWrapper {
+	width: 100%;
 }
 
 .searchInput,
@@ -51,5 +50,13 @@
 }
 
 .searchInput {
-	width: $input-width;
+	// width: $input-width;
+	width: 80%;
+	border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.searchButton {
+	border-radius: 0 0.5rem 0.5rem 0;
+	width: 7em;
+	cursor: pointer;
 }

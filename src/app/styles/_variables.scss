@@ -1,17 +1,18 @@
 // Color variables
 $primary-color: rgba(127, 198, 220, 1);
 $secondary-color: rgba(235, 235, 235, 1);
-$grey: rgb(124, 124, 124);
+$black: rgb(28, 28, 28);
+$grey: rgba(124, 124, 124, 1);
 
 // Font variables
 $base-font-size: 1rem;
-$font-color: rgba(34, 34, 34, 1);
 
 // Card variables
 $card-padding: 3rem;
 $card-border-radius: 3rem;
+$card-margin: 1rem;
 
 // Input variables
-$input-padding: 1rem;
+$input-padding: 1.2rem;
 $input-width: 50%;
 $input-border: none;
