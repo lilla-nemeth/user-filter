@@ -157,22 +157,22 @@
 
 /* Media queries */
 
-// XS devices
+// XS devices - Max. 575px
 @media (max-width: $xs-device-min) {
 }
 
-// S devices
+// S devices - Min. 576px and Max. 767px
 @media (min-width: $s-device-min) and (max-width: $s-device-max) {
 }
 
-// M devices
+// M devices - Min. 768px and Max. 991px
 @media (min-width: $m-device-min) and (max-width: $m-device-max) {
 }
 
-// L devices
+// L devices - Min. 992px and Max. 1199px
 @media (min-width: $l-device-min) and (max-width: $l-device-max) {
 }
 
-// XL devices
+// XL devices - Min. 1200px
 @media (min-width: $xl-device-min) {
 }
