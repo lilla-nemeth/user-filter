@@ -1,23 +1,19 @@
 'use client';
-import { ChangeEvent, useEffect, useState } from 'react';
-
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 // Styles
 import styles from '@/app/styles/Dashboard.module.scss';
-
 // Components
 import Input from './components/Input';
 import Button from './components/Button';
 import Dropdown from './components/Dropdown';
 import Card from './components/Card';
-
 // Helpers
 import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helpers';
-
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownList from './components/DropdownList';
 import AscendingIcon from './components/icons/AscendingIcon';
-
+// Constants
 import { SORT_BY } from '@/types/constants';
 
 export default function Dashboard() {
@@ -25,10 +21,10 @@ export default function Dashboard() {
 	const [userAPIData, setUserAPIData] = useState<dataTypes.User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
-	const [display, setDisplay] = useState<string>('none');
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
 	const [isAscending, setIsAscending] = useState<boolean>(true);
-
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
 	useEffect(() => {
@@ -40,16 +36,26 @@ export default function Dashboard() {
 					throw new Error('Something went wrong, please come back later.');
 				}
 				const users: dataTypes.User[] = await res.json();
-
 				setUserAPIData(users);
 				setFilteredUserData(userAPIData);
 			} catch (err) {
 				setError((err as Error).message);
 			}
 		};
-
 		fetchUsers();
 	}, []);
+
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen]);
 
 	if (error) {
 		return <div className='errorCard'>{error}</div>;
@@ -61,14 +67,18 @@ export default function Dashboard() {
 	});
 
 	const handleDisplay = () => {
-		if (display === 'none') {
-			setDisplay('block');
+		setIsOpen(!isOpen);
 
+		if (isOpen === true) {
 			if (sortCategoryName !== SORT_BY) {
 				setSortCategoryName(SORT_BY);
 			}
-		} else {
-			setDisplay('none');
+		}
+	};
+
+	const handleClickOutside = (e: MouseEvent) => {
+		if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+			setIsOpen(false);
 		}
 	};
 
@@ -99,19 +109,20 @@ export default function Dashboard() {
 						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 					/>
 				</div>
-				<div className='dropdownWrapper'>
+				<div ref={dropdownRef} className='dropdownWrapper'>
 					<Dropdown dropdownClass='dropdown' dropdownHeadClass='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
-						<DropdownList
-							dropdownListClass='dropdownList'
-							dropdownItemClass='dropdownItem'
-							display={display}
-							data={userAPIData}
-							setSortCategoryName={setSortCategoryName}
-							acceptedCategories={acceptedSortCategories}
-							setUserAPIData={setUserAPIData}
-							isAscending={isAscending}
-							setIsAscending={setIsAscending}
-						/>
+						{isOpen && (
+							<DropdownList
+								dropdownListClass='dropdownList'
+								dropdownItemClass='dropdownItem'
+								data={userAPIData}
+								setSortCategoryName={setSortCategoryName}
+								acceptedCategories={acceptedSortCategories}
+								setUserAPIData={setUserAPIData}
+								isAscending={isAscending}
+								setIsAscending={setIsAscending}
+							/>
+						)}
 					</Dropdown>
 				</div>
 				<div className='orderButtonWrapper'>

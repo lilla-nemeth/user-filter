@@ -5,7 +5,6 @@ function DropdownList(props: any) {
 	const {
 		dropdownListClass,
 		dropdownItemClass,
-		display,
 		data,
 		acceptedCategories,
 		setSortCategoryName,
@@ -16,7 +15,7 @@ function DropdownList(props: any) {
 
 	return data.map((el: any) => {
 		return (
-			<div key={el.id} className={dropdownListClass} style={{ display: display }}>
+			<div key={el.id} className={dropdownListClass}>
 				{Object.keys(el).map((item) => {
 					return (
 						<div
