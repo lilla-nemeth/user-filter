@@ -154,3 +154,25 @@
 .buttonIcon {
 	fill: $tertiary-color;
 }
+
+/* Media queries */
+
+// XS devices
+@media (max-width: $xs-device-min) {
+}
+
+// S devices
+@media (min-width: $s-device-min) and (max-width: $s-device-max) {
+}
+
+// M devices
+@media (min-width: $m-device-min) and (max-width: $m-device-max) {
+}
+
+// L devices
+@media (min-width: $l-device-min) and (max-width: $l-device-max) {
+}
+
+// XL devices
+@media (min-width: $xl-device-min) {
+}
