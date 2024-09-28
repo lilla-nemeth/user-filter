@@ -15,11 +15,11 @@ const handleButtonClick = (stateSetter: Dispatch<SetStateAction<User[]>>, filter
 	stateSetter(filteredData);
 };
 
-const handleDisplay = (isOpen: boolean, stateSetter: Dispatch<SetStateAction<boolean>>) => {
+const handleDisplay = (isOpen: boolean, stateSetter: Dispatch<SetStateAction<boolean>>): void => {
 	stateSetter(!isOpen);
 };
 
-const handleDefaultName = (isOpen: boolean, categoryName: string, str: string, stateSetter: Dispatch<SetStateAction<string>>) => {
+const handleDefaultName = (isOpen: boolean, categoryName: string, str: string, stateSetter: Dispatch<SetStateAction<string>>): void => {
 	if (isOpen === false && categoryName !== str) {
 		stateSetter(str);
 	}
