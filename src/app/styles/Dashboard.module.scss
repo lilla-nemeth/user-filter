@@ -115,7 +115,6 @@
 .dropdownHead {
 	padding: $input-padding;
 	background-color: $secondary-color;
-	border-radius: 0.5rem;
 }
 
 .dropdownHead:hover,
@@ -127,11 +126,11 @@
 	background-color: $white;
 	position: absolute;
 	width: inherit;
-	border-radius: 0.5rem;
+	border: 0.4rem solid $secondary-color;
 }
 
 .dropdownItem {
-	padding: $input-padding;
+	padding: 1.2rem 0.9rem;
 }
 
 .dropdownItem:hover {

@@ -114,6 +114,7 @@ export default function Dashboard() {
 						<Dropdown
 							dropdownClass={styles.dropdown}
 							dropdownHeadClass={styles.dropdownHead}
+							style={isOpen ? { borderRadius: '0.5rem 0.5rem 0 0' } : { borderRadius: '0.5rem' }}
 							text={sortCategoryName}
 							onClick={handleDisplay}
 						>
@@ -127,6 +128,7 @@ export default function Dashboard() {
 									setUserAPIData={setUserAPIData}
 									isAscending={isAscending}
 									setIsAscending={setIsAscending}
+									style={isOpen ? { borderRadius: '0 0 0.5rem 0.5rem ' } : { borderRadius: '0.5rem' }}
 								/>
 							)}
 						</Dropdown>
