@@ -7,7 +7,7 @@ $black: rgb(28, 28, 28);
 $grey: rgba(124, 124, 124, 1);
 
 /* Box shadow */
-$box-shadow: -1px 20px 33px 3px rgba(0,0,0,0.13);
+$box-shadow: -1px 20px 33px 3px rgba(0, 0, 0, 0.13);
 
 /* Font variables */
 $base-font-size: 1rem;
@@ -24,18 +24,33 @@ $input-width: 50%;
 $input-border: none;
 
 /* Device breakpoints */
-// Phones
-$xs-device-min: 575px;
-$s-device-min: 576px;
-$s-device-max: 767px;
 
-// Tablets and small desktops
-$m-device-min: 768px;
-$m-device-max: 991px;
+// Extra Extra Small
+$xxs-device-max: 575px;
 
-// Desktops
-$l-device-min: 992px;
-$l-device-max: 1199px;
+// Extra Small
+$xs-device-min: 576px;
+$xs-device-max: 767px;
 
-// Large Desktops
-$xl-device-min: 1200px;
+// Small
+$s-device-min: 768px;
+$s-device-max: 991px;
+
+// Medium
+$m-device-min: 992px;
+$m-device-max: 1199px;
+
+// Large
+$l-device-min: 1200px;
+$l-device-max: 1599px;
+
+// Extra Large
+$xl-device-min: 1600px;
+$xl-device-max: 1919px;
+
+// Ultra Wide
+$xxl-device-min: 1920px;
+$xxl-device-max: 2559px;
+
+// High Resolution
+$xxxl-device-min: 2560px;

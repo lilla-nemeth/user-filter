@@ -1,21 +1,19 @@
 @import './variables';
 
 /* Card styles */
-.cardContainer {
-	display: flex;
-	justify-content: center;
-}
-
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+.cardWrapper:last-child {
+	margin-bottom: 2rem;
 }
 
 .card {
 	display: flex;
 	background-color: $white;
 	border-radius: $card-border-radius;
-	min-width: 400px;
 	margin: $card-margin;
 	box-shadow: $box-shadow;
 }
@@ -55,9 +53,8 @@
 /* Filter styles - Searching & Sorting */
 .filterContainer {
 	display: flex;
-	padding: 40px;
+	padding: 1rem;
 	justify-content: space-evenly;
-	margin: 0 7em 0 7em;
 }
 
 .searchWrapper {
@@ -175,8 +172,8 @@
 
 /* Media queries */
 
-// XS devices - Max. 575px
-@media (max-width: $xs-device-min) {
+// XS devices - max. 575px
+@media (max-width: $xxs-device-max) {
 	.cardCategories {
 		display: none;
 	}
@@ -187,7 +184,14 @@
 	}
 }
 
-// S devices - Max. 767px
+// M devices - min. 768px and max. 991px
+@media (min-width: $s-device-min) and (max-width: $s-device-max) {
+	.contentWrapper {
+		margin: 0 4em 0 4em;
+	}
+}
+
+// M devices - max. 991px
 @media (max-width: $s-device-max) {
 	.filterContainer {
 		padding: unset;
@@ -226,32 +230,47 @@
 		width: 100%;
 		border-radius: 0.5rem;
 	}
+}
+
+// L devices - min. 992px and max. 1199px
+@media (min-width: $m-device-min) and (max-width: $m-device-max) {
+	.contentWrapper {
+		margin: 0 6em 0 6em;
+	}
 
 	.cardWrapper {
-		display: unset;
-	}
-
-	.cardContainer {
-		display: unset;
-	}
-
-	.card {
-		min-width: unset;
+		margin: 0 10em;
 	}
 }
 
-// S devices - Min. 576px and Max. 767px
-// @media (min-width: $s-device-min) and (max-width: $s-device-max) {
-// }
-
-// M devices - Min. 768px and Max. 991px
-@media (min-width: $m-device-min) and (max-width: $m-device-max) {
-}
-
-// L devices - Min. 992px and Max. 1199px
+// XL devices - min. 1200px and max. 1599px
 @media (min-width: $l-device-min) and (max-width: $l-device-max) {
+	.contentWrapper {
+		margin: 0 8em 0 8em;
+	}
+
+	.cardWrapper {
+		margin: 0 14em;
+	}
 }
 
-// XL devices - Min. 1200px
+// XL devices - min. 1600px
 @media (min-width: $xl-device-min) {
+	.contentWrapper {
+		margin: 0 12em 0 12em;
+	}
+}
+
+// XL-XXL devices - min. 1500px and max. 1919px
+@media (min-width: $xl-device-min) and (max-width: $xl-device-max) {
+	.cardWrapper {
+		margin: 0 18em;
+	}
+}
+
+// XXL devices - min. 1920px
+@media (min-width: $xxl-device-min) {
+	.cardWrapper {
+		margin: 0 20em;
+	}
 }

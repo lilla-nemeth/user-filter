@@ -83,7 +83,7 @@ export default function Dashboard() {
 	};
 
 	return (
-		<div>
+		<div className={styles.contentWrapper}>
 			<h1 className='dela-gothic-one'>Users</h1>
 			<div className={styles.filterContainer}>
 				<div className={styles.searchWrapper}>
@@ -146,36 +146,34 @@ export default function Dashboard() {
 					</div>
 				</div>
 			</div>
-			<div className={styles.cardContainer}>
-				<div className={styles.cardWrapper}>
-					{search.length > 1
-						? filteredUserData.map((user: any) => {
-								return (
-									<Card
-										cardClass={styles.card}
-										valueClass={styles.cardValues}
-										categoryClass={styles.cardCategories}
-										fullNameClass={styles.cardFullName}
-										cardCategoryFullName={styles.cardCategoryFullName}
-										user={user}
-										key={user.id}
-									/>
-								);
-						  })
-						: userAPIData.map((user: any) => {
-								return (
-									<Card
-										cardClass={styles.card}
-										valueClass={styles.cardValues}
-										categoryClass={styles.cardCategories}
-										fullNameClass={styles.cardFullName}
-										cardCategoryFullName={styles.cardCategoryFullName}
-										user={user}
-										key={user.id}
-									/>
-								);
-						  })}
-				</div>
+			<div className={styles.cardWrapper}>
+				{search.length > 1
+					? filteredUserData.map((user: any) => {
+							return (
+								<Card
+									cardClass={styles.card}
+									valueClass={styles.cardValues}
+									categoryClass={styles.cardCategories}
+									fullNameClass={styles.cardFullName}
+									cardCategoryFullName={styles.cardCategoryFullName}
+									user={user}
+									key={user.id}
+								/>
+							);
+					  })
+					: userAPIData.map((user: any) => {
+							return (
+								<Card
+									cardClass={styles.card}
+									valueClass={styles.cardValues}
+									categoryClass={styles.cardCategories}
+									fullNameClass={styles.cardFullName}
+									cardCategoryFullName={styles.cardCategoryFullName}
+									user={user}
+									key={user.id}
+								/>
+							);
+					  })}
 			</div>
 		</div>
 	);
