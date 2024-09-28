@@ -31,7 +31,7 @@ export default function Dashboard() {
 	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
+	const [sortCategoryName, setSortCategoryName] = useState<string>(SORT_BY);
 	const [isAscending, setIsAscending] = useState<boolean>(true);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const acceptedSortCategories: string[] = ['name', 'email'];

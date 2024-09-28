@@ -1,4 +1,6 @@
-function Input(props: any) {
+import { InputProps } from '@/types/props';
+
+function Input(props: InputProps) {
 	const { className, htmlFor, type, name, text, onChange, value } = props;
 
 	return (

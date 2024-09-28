@@ -1,7 +1,8 @@
 import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
+import { DropdownListProps } from '@/types/props';
 import { v4 as uuidv4 } from 'uuid';
 
-function DropdownList(props: any) {
+function DropdownList(props: DropdownListProps) {
 	const {
 		dropdownListClass,
 		dropdownItemClass,

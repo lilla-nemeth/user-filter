@@ -1,4 +1,6 @@
-function Dropdown(props: any) {
+import { DropdownProps } from '@/types/props';
+
+function Dropdown(props: DropdownProps) {
 	const { dropdownClass, dropdownHeadClass, text, onClick, style } = props;
 
 	return (
