@@ -83,7 +83,7 @@ export default function Dashboard() {
 	};
 
 	return (
-		<div>
+		<div className={styles.contentWrapper}>
 			<h1 className='dela-gothic-one'>Users</h1>
 			<div className={styles.filterContainer}>
 				<div className={styles.searchWrapper}>
@@ -109,63 +109,71 @@ export default function Dashboard() {
 						onClick={() => handleButtonClick(setFilteredUserData, filteredData)}
 					/>
 				</div>
-				<div ref={dropdownRef} className='dropdownWrapper'>
-					<Dropdown dropdownClass='dropdown' dropdownHeadClass='dropdownHead' text={sortCategoryName} onClick={handleDisplay}>
-						{isOpen && (
-							<DropdownList
-								dropdownListClass='dropdownList'
-								dropdownItemClass='dropdownItem'
-								data={userAPIData}
-								setSortCategoryName={setSortCategoryName}
-								acceptedCategories={acceptedSortCategories}
-								setUserAPIData={setUserAPIData}
-								isAscending={isAscending}
-								setIsAscending={setIsAscending}
-							/>
-						)}
-					</Dropdown>
-				</div>
-				<div className='orderButtonWrapper'>
-					<Button
-						className='orderButton'
-						onClick={() => {
-							setIsAscending(!isAscending);
-							handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
-						}}
-						content={<AscendingIcon className='buttonIcon' isAscending={isAscending} />}
-					/>
+				<div className={styles.sortContainer}>
+					<div ref={dropdownRef} className={styles.dropdownWrapper}>
+						<Dropdown
+							dropdownClass={styles.dropdown}
+							dropdownHeadClass={styles.dropdownHead}
+							style={isOpen ? { borderRadius: '0.5rem 0.5rem 0 0' } : { borderRadius: '0.5rem' }}
+							text={sortCategoryName}
+							onClick={handleDisplay}
+						>
+							{isOpen && (
+								<DropdownList
+									dropdownListClass={styles.dropdownList}
+									dropdownItemClass={styles.dropdownItem}
+									data={userAPIData}
+									setSortCategoryName={setSortCategoryName}
+									acceptedCategories={acceptedSortCategories}
+									setUserAPIData={setUserAPIData}
+									isAscending={isAscending}
+									setIsAscending={setIsAscending}
+									style={isOpen ? { borderRadius: '0 0 0.5rem 0.5rem ' } : { borderRadius: '0.5rem' }}
+								/>
+							)}
+						</Dropdown>
+					</div>
+					<div className={styles.orderButtonWrapper}>
+						<Button
+							className={styles.orderButton}
+							disabled={sortCategoryName === SORT_BY}
+							onClick={() => {
+								setIsAscending(!isAscending);
+								handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+							}}
+							content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
+						/>
+					</div>
 				</div>
 			</div>
-			<div className={styles.cardContainer}>
-				<div className={styles.cardWrapper}>
-					{search.length > 1
-						? filteredUserData.map((user: any) => {
-								return (
-									<Card
-										cardClass={styles.card}
-										valueClass={styles.cardValues}
-										categoryClass={styles.cardCategories}
-										fullNameClass={styles.cardFullName}
-										cardCategoryFullName={styles.cardCategoryFullName}
-										user={user}
-										key={user.id}
-									/>
-								);
-						  })
-						: userAPIData.map((user: any) => {
-								return (
-									<Card
-										cardClass={styles.card}
-										valueClass={styles.cardValues}
-										categoryClass={styles.cardCategories}
-										fullNameClass={styles.cardFullName}
-										cardCategoryFullName={styles.cardCategoryFullName}
-										user={user}
-										key={user.id}
-									/>
-								);
-						  })}
-				</div>
+			<div className={styles.cardWrapper}>
+				{search.length > 1
+					? filteredUserData.map((user: any) => {
+							return (
+								<Card
+									cardClass={styles.card}
+									valueClass={styles.cardValues}
+									categoryClass={styles.cardCategories}
+									fullNameClass={styles.cardFullName}
+									cardCategoryFullName={styles.cardCategoryFullName}
+									user={user}
+									key={user.id}
+								/>
+							);
+					  })
+					: userAPIData.map((user: any) => {
+							return (
+								<Card
+									cardClass={styles.card}
+									valueClass={styles.cardValues}
+									categoryClass={styles.cardCategories}
+									fullNameClass={styles.cardFullName}
+									cardCategoryFullName={styles.cardCategoryFullName}
+									user={user}
+									key={user.id}
+								/>
+							);
+					  })}
 			</div>
 		</div>
 	);

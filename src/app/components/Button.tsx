@@ -1,8 +1,8 @@
 function Button(props: any) {
-	const { type, content, className, onClick } = props;
+	const { type, content, className, onClick, disabled } = props;
 
 	return (
-		<button className={className} type={type} onClick={onClick}>
+		<button className={className} type={type} onClick={onClick} disabled={disabled}>
 			{content}
 		</button>
 	);

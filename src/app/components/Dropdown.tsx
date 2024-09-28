@@ -1,9 +1,11 @@
 function Dropdown(props: any) {
-	const { dropdownClass, dropdownHeadClass, text, onClick } = props;
+	const { dropdownClass, dropdownHeadClass, text, onClick, style } = props;
 
 	return (
 		<div className={dropdownClass} onClick={onClick}>
-			<div className={dropdownHeadClass}>{text}</div>
+			<div className={dropdownHeadClass} style={style}>
+				{text}
+			</div>
 			{props.children}
 		</div>
 	);

@@ -1,21 +1,22 @@
 @import './variables';
 
-.cardContainer {
-	display: flex;
-	justify-content: center;
-}
-
+/* Card styles */
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
+	margin-top: 2rem;
+}
+
+.cardWrapper:last-child {
+	margin-bottom: 2rem;
 }
 
 .card {
+	display: flex;
 	background-color: $white;
 	border-radius: $card-border-radius;
-	min-width: 400px;
-	margin: $card-margin;
-	display: flex;
+	margin: 0.5rem 1rem;
+	box-shadow: $box-shadow;
 }
 
 .cardCategories {
@@ -26,6 +27,7 @@
 	background-color: $secondary-color;
 	color: $black;
 	padding: 2rem;
+	word-wrap: break-word;
 }
 
 .cardValues {
@@ -34,6 +36,7 @@
 	width: 70%;
 	flex-direction: column;
 	padding: 2rem;
+	word-wrap: break-word;
 }
 
 .cardCategoryFullName,
@@ -48,15 +51,18 @@
 	font-family: $font-dela-gothic-one;
 }
 
+/* Filter styles - Searching & Sorting */
 .filterContainer {
 	display: flex;
-	padding: 40px;
+	padding: 1rem;
 	justify-content: space-evenly;
-	margin: 0 7em 0 7em;
 }
 
 .searchWrapper {
+	display: flex;
 	width: 100%;
+	box-shadow: $box-shadow;
+	border-radius: 0.5rem;
 }
 
 .searchInput,
@@ -65,7 +71,7 @@
 }
 
 .searchInput {
-	width: 89%;
+	width: 100%;
 	padding: $input-padding;
 	border-radius: 0.5rem 0 0 0.5rem;
 }
@@ -82,4 +88,190 @@
 
 .searchButton:hover {
 	color: $black;
+}
+
+.sortContainer {
+	display: flex;
+}
+
+.dropdownWrapper {
+	display: flex;
+	justify-content: center;
+	margin: 0 1rem 0 1rem;
+	box-shadow: $box-shadow;
+	border-radius: 0.5rem;
+}
+
+.dropdown {
+	width: 300px;
+	z-index: 1000;
+	cursor: pointer;
+	color: $tertiary-color;
+	position: relative;
+}
+
+.dropdownHead {
+	padding: $input-padding;
+	background-color: $secondary-color;
+}
+
+.dropdownHead:hover,
+.dropdownItem:hover {
+	color: $black;
+}
+
+.dropdownList {
+	background-color: $white;
+	position: absolute;
+	width: inherit;
+	border: 0.4rem solid $secondary-color;
+}
+
+.dropdownItem {
+	padding: 1.2rem 0.9rem;
+}
+
+.dropdownItem:hover {
+	border-radius: 0.5rem;
+}
+
+.dropdownItem:empty {
+	display: none;
+}
+
+.orderButtonWrapper {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	box-shadow: $box-shadow;
+	border-radius: 0.5rem;
+}
+
+.orderButton {
+	background-color: $secondary-color;
+	padding: 0.8rem;
+	border-style: $input-border;
+	border-radius: 0.5rem;
+	height: 3.4rem;
+	width: 3.4rem;
+	cursor: pointer;
+}
+
+.buttonIcon {
+	fill: $tertiary-color;
+}
+
+.orderButton:disabled {
+	cursor: auto;
+}
+
+.orderButton:hover:not([disabled]) {
+	.buttonIcon {
+		fill: $black;
+	}
+}
+
+/* Media queries */
+
+// XS devices - max. 575px
+@media (max-width: $xxs-device-max) {
+	.cardCategories {
+		display: none;
+	}
+
+	.cardValues {
+		width: 100%;
+		padding: 2rem;
+	}
+}
+
+// M devices - min. 768px and max. 991px
+@media (min-width: $s-device-min) and (max-width: $s-device-max) {
+	.contentWrapper {
+		margin: 0 4em 0 4em;
+	}
+}
+
+// M devices - max. 991px
+@media (max-width: $s-device-max) {
+	.filterContainer {
+		padding: unset;
+		margin: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sortContainer {
+		padding: 0.5rem 0;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 0;
+	}
+
+	.searchWrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.dropdown {
+		flex: 1;
+		width: unset;
+	}
+
+	.dropdownWrapper {
+		padding: unset;
+		justify-content: unset;
+		margin: unset;
+		flex: 1;
+	}
+
+	.dropdownList {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		border-radius: 0.5rem;
+	}
+}
+
+// L devices - min. 992px and max. 1199px
+@media (min-width: $m-device-min) and (max-width: $m-device-max) {
+	.contentWrapper {
+		margin: 0 6em 0 6em;
+	}
+
+	.cardWrapper {
+		margin: 0 10em;
+	}
+}
+
+// XL devices - min. 1200px and max. 1599px
+@media (min-width: $l-device-min) and (max-width: $l-device-max) {
+	.contentWrapper {
+		margin: 0 8em 0 8em;
+	}
+
+	.cardWrapper {
+		margin: 0 14em;
+	}
+}
+
+// XL devices - min. 1600px
+@media (min-width: $xl-device-min) {
+	.contentWrapper {
+		margin: 0 12em 0 12em;
+	}
+}
+
+// XL-XXL devices - min. 1500px and max. 1919px
+@media (min-width: $xl-device-min) and (max-width: $xl-device-max) {
+	.cardWrapper {
+		margin: 0 16em;
+	}
+}
+
+// XXL devices - min. 1920px
+@media (min-width: $xxl-device-min) {
+	.cardWrapper {
+		margin: 0 20em;
+	}
 }

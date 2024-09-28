@@ -11,11 +11,12 @@ function DropdownList(props: any) {
 		setUserAPIData,
 		isAscending,
 		setIsAscending,
+		style,
 	} = props;
 
 	return data.map((el: any) => {
 		return (
-			<div key={el.id} className={dropdownListClass}>
+			<div key={el.id} className={dropdownListClass} style={style}>
 				{Object.keys(el).map((item) => {
 					return (
 						<div

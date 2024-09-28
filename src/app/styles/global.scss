@@ -137,6 +137,10 @@ h1 {
 	color: $black;
 }
 
+td {
+	margin: 0.25rem;
+}
+
 .errorCard {
 	background-color: $white;
 	color: $black;
@@ -146,77 +150,4 @@ h1 {
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
-}
-
-.dropdownWrapper {
-	display: flex;
-	justify-content: center;
-	padding: 0 1rem 0 1rem;
-}
-
-.dropdown {
-	width: 300px;
-	z-index: 1;
-	cursor: pointer;
-	color: $tertiary-color;
-}
-
-.dropdownHead {
-	padding: $input-padding;
-	background-color: $secondary-color;
-	border-radius: 0.5rem;
-}
-
-.dropdownHead:hover,
-.dropdownItem:hover {
-	color: $black;
-}
-
-.dropdownList {
-	background-color: $white;
-	position: absolute;
-	width: inherit;
-	border-radius: 0.5rem;
-}
-
-.dropdownItem {
-	padding: $input-padding;
-}
-
-.dropdownItem:hover {
-	border-radius: 0.5rem;
-}
-
-.dropdownItem:empty {
-	display: none;
-}
-
-.orderButtonWrapper {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
-}
-
-.orderButton {
-	background-color: $secondary-color;
-	padding: 0.8rem;
-	border-style: $input-border;
-	border-radius: 0.5rem;
-	height: 3.4rem;
-	width: 3.4rem;
-	cursor: pointer;
-}
-
-.orderButton:hover {
-	.buttonIcon {
-		fill: $black;
-	}
-}
-
-.buttonIcon {
-	fill: $tertiary-color;
-}
-
-td {
-	margin: 0.25rem;
 }
