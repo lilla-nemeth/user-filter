@@ -1,6 +1,6 @@
 import { InputProps } from '@/types/props';
 
-function Input(props: InputProps) {
+const Input: React.FC<InputProps> = (props) => {
 	const { className, htmlFor, type, name, text, onChange, value } = props;
 
 	return (
@@ -9,6 +9,6 @@ function Input(props: InputProps) {
 			<input className={className} type={type} name={name} onChange={onChange} value={value} />
 		</>
 	);
-}
+};
 
 export default Input;

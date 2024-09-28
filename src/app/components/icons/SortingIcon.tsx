@@ -1,6 +1,6 @@
-import { SortingIconProps } from "@/types/props";
+import { SortingIconProps } from '@/types/props';
 
-function SortingIcon(props: SortingIconProps) {
+const SortingIcon: React.FC<SortingIconProps> = (props) => {
 	const { className, isAscending } = props;
 
 	return (
@@ -20,6 +20,6 @@ function SortingIcon(props: SortingIconProps) {
 			/>
 		</svg>
 	);
-}
+};
 
 export default SortingIcon;

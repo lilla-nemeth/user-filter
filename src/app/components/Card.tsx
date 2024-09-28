@@ -1,6 +1,6 @@
 import { CardProps } from '@/types/props';
 
-function Card(props: CardProps) {
+const Card: React.FC<CardProps> = (props) => {
 	const { cardClass, categoryClass, valueClass, user, cardCategoryFullName, fullNameClass, key } = props;
 
 	return (
@@ -26,6 +26,6 @@ function Card(props: CardProps) {
 			</ul>
 		</div>
 	);
-}
+};
 
 export default Card;

@@ -1,6 +1,6 @@
-import { ButtonProps } from "@/types/props";
+import { ButtonProps } from '@/types/props';
 
-function Button(props: ButtonProps) {
+const Button: React.FC<ButtonProps> = (props) => {
 	const { type, content, className, onClick, disabled } = props;
 
 	return (
@@ -8,6 +8,6 @@ function Button(props: ButtonProps) {
 			{content}
 		</button>
 	);
-}
+};
 
 export default Button;

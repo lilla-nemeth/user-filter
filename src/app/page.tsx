@@ -25,7 +25,7 @@ import SortingIcon from './components/icons/SortingIcon';
 // Constants
 import { SORT_BY } from '@/types/constants';
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
 	const [search, setSearch] = useState('');
 	const [userAPIData, setUserAPIData] = useState<User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<User[]>([]);
@@ -187,4 +187,6 @@ export default function Dashboard() {
 			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userAPIData)}</div>
 		</div>
 	);
-}
+};
+
+export default Dashboard;

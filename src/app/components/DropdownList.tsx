@@ -3,7 +3,7 @@ import { DropdownListProps } from '@/types/props';
 import { v4 as uuidv4 } from 'uuid';
 import { User } from '@/types/data';
 
-function DropdownList(props: DropdownListProps) {
+const DropdownList: React.FC<DropdownListProps> = (props) => {
 	const {
 		dropdownListClass,
 		dropdownItemClass,
@@ -39,6 +39,6 @@ function DropdownList(props: DropdownListProps) {
 			</div>
 		);
 	});
-}
+};
 
 export default DropdownList;
