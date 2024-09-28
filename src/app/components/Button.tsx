@@ -1,4 +1,6 @@
-function Button(props: any) {
+import { ButtonProps } from "@/types/props";
+
+function Button(props: ButtonProps) {
 	const { type, content, className, onClick, disabled } = props;
 
 	return (

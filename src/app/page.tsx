@@ -174,6 +174,7 @@ export default function Dashboard() {
 						<Button
 							className={styles.orderButton}
 							disabled={sortCategoryName === SORT_BY}
+							type={'button'}
 							onClick={() => {
 								setIsAscending(!isAscending);
 								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);

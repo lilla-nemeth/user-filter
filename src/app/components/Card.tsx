@@ -1,8 +1,10 @@
-function Card(props: any) {
-	const { cardClass, categoryClass, valueClass, user, cardCategoryFullName, fullNameClass } = props;
+import { CardProps } from '@/types/props';
+
+function Card(props: CardProps) {
+	const { cardClass, categoryClass, valueClass, user, cardCategoryFullName, fullNameClass, key } = props;
 
 	return (
-		<div className={cardClass} key={user.id}>
+		<div className={cardClass} key={key}>
 			<ul className={categoryClass}>
 				<li className={cardCategoryFullName}>Name</li>
 				<li>Email</li>
@@ -18,9 +20,7 @@ function Card(props: any) {
 				<li>{user.address.street}</li>
 				<li>{user.address.suite}</li>
 				<li>{user.address.city}</li>
-				<li>{user.address.city}</li>
 				<li>{user.address.zipcode}</li>
-				{/* I don't believe longitude and latitude should be visible */}
 				{/* <li>{user.address.geo.lat}</li>
 				<li>{user.address.geo.lng}</li> */}
 			</ul>
