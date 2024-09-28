@@ -4,6 +4,7 @@
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
+	margin-top: 2rem;
 }
 
 .cardWrapper:last-child {
@@ -14,7 +15,7 @@
 	display: flex;
 	background-color: $white;
 	border-radius: $card-border-radius;
-	margin: $card-margin;
+	margin: 0.5rem 1rem;
 	box-shadow: $box-shadow;
 }
 
@@ -264,7 +265,7 @@
 // XL-XXL devices - min. 1500px and max. 1919px
 @media (min-width: $xl-device-min) and (max-width: $xl-device-max) {
 	.cardWrapper {
-		margin: 0 18em;
+		margin: 0 16em;
 	}
 }
 
