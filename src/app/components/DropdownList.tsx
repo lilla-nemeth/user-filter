@@ -1,4 +1,4 @@
-import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSort } from '@/app/utils/helpers';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSort } from '@/app/utils/helperFunctions';
 import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {

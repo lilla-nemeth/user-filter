@@ -8,7 +8,7 @@ import Button from './components/Button';
 import Dropdown from './components/Dropdown';
 import Card from './components/Card';
 // Helpers
-import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helpers';
+import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helperFunctions';
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownList from './components/DropdownList';
