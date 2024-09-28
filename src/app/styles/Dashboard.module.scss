@@ -12,11 +12,11 @@
 }
 
 .card {
+	display: flex;
 	background-color: $white;
 	border-radius: $card-border-radius;
 	min-width: 400px;
 	margin: $card-margin;
-	display: flex;
 	box-shadow: $box-shadow;
 }
 
@@ -28,6 +28,7 @@
 	background-color: $secondary-color;
 	color: $black;
 	padding: 2rem;
+	word-wrap: break-word;
 }
 
 .cardValues {
@@ -36,6 +37,7 @@
 	width: 70%;
 	flex-direction: column;
 	padding: 2rem;
+	word-wrap: break-word;
 }
 
 .cardCategoryFullName,
@@ -158,6 +160,10 @@
 	cursor: pointer;
 }
 
+.buttonIcon {
+	fill: $tertiary-color;
+}
+
 .orderButton:disabled {
 	cursor: auto;
 }
@@ -168,14 +174,22 @@
 	}
 }
 
-.buttonIcon {
-	fill: $tertiary-color;
-}
-
 /* Media queries */
 
 // XS devices - Max. 575px
 @media (max-width: $xs-device-min) {
+	.cardCategories {
+		display: none;
+	}
+
+	.cardValues {
+		width: 100%;
+		padding: 2rem;
+	}
+}
+
+// S devices - Max. 767px
+@media (max-width: $s-device-max) {
 	.filterContainer {
 		padding: unset;
 		margin: 1rem;
@@ -213,11 +227,23 @@
 		width: 100%;
 		border-radius: 0.5rem;
 	}
+
+	.cardWrapper {
+		display: unset;
+	}
+
+	.cardContainer {
+		display: unset;
+	}
+
+	.card {
+		min-width: unset;
+	}
 }
 
 // S devices - Min. 576px and Max. 767px
-@media (min-width: $s-device-min) and (max-width: $s-device-max) {
-}
+// @media (min-width: $s-device-min) and (max-width: $s-device-max) {
+// }
 
 // M devices - Min. 768px and Max. 991px
 @media (min-width: $m-device-min) and (max-width: $m-device-max) {
