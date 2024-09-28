@@ -108,19 +108,17 @@ export default function Dashboard() {
 
 		return Object.keys(user).some((key: string) => {
 			const userValue = user[key as keyof dataTypes.User];
-			let isSearchKeyWordMatch;
+
 			// if data is not nested
 			if (typeof userValue === 'string') {
-				isSearchKeyWordMatch = userValue.toString().toLowerCase().includes(searchToLowerCase);
-				return isSearchKeyWordMatch;
+				return userValue.toString().toLowerCase().includes(searchToLowerCase);
 			}
 
 			// if data is nested (like address or company)
 			if (typeof userValue === 'object' && userValue !== null) {
 				return Object.values(userValue).some((nestedValue: string) => {
 					if (typeof nestedValue === 'string') {
-						isSearchKeyWordMatch = nestedValue.toString().toLowerCase().includes(searchToLowerCase);
-						return isSearchKeyWordMatch;
+						return nestedValue.toString().toLowerCase().includes(searchToLowerCase);
 					}
 				});
 			}
