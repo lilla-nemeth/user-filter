@@ -1,4 +1,4 @@
-function AscendingIcon(props: any) {
+function SortingIcon(props: any) {
 	const { className, isAscending } = props;
 
 	return (
@@ -20,4 +20,4 @@ function AscendingIcon(props: any) {
 	);
 }
 
-export default AscendingIcon;
+export default SortingIcon;

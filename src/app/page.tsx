@@ -21,7 +21,7 @@ import {
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownList from './components/DropdownList';
-import AscendingIcon from './components/icons/AscendingIcon';
+import SortingIcon from './components/icons/SortingIcon';
 // Constants
 import { SORT_BY } from '@/types/constants';
 
@@ -179,7 +179,7 @@ export default function Dashboard() {
 								setIsAscending(!isAscending);
 								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
 							}}
-							content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
+							content={<SortingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 						/>
 					</div>
 				</div>
