@@ -3,12 +3,31 @@ import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 // Types
 import * as dataTypes from '@/types/data';
 
-const handleInputChange = (stateSetter: Dispatch<SetStateAction<string>>, e: ChangeEvent<HTMLInputElement>): void => {
+const handleText = (stateSetter: Dispatch<SetStateAction<string>>, e: ChangeEvent<HTMLInputElement>): void => {
 	stateSetter(e.target.value);
+};
+
+const handleUserData = (
+	searchStr: string,
+	stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>,
+	filteredData: dataTypes.User[],
+	apiData: dataTypes.User[]
+): void => {
+	searchStr !== '' ? stateSetter(filteredData) : stateSetter(apiData);
 };
 
 const handleButtonClick = (stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>, filteredData: dataTypes.User[]): void => {
 	stateSetter(filteredData);
+};
+
+const handleDisplay = (isOpen: boolean, stateSetter: Dispatch<SetStateAction<boolean>>) => {
+	stateSetter(!isOpen);
+};
+
+const handleDefaultName = (isOpen: boolean, categoryName: string, str: string, stateSetter: Dispatch<SetStateAction<string>>) => {
+	if (isOpen === false && categoryName !== str) {
+		stateSetter(str);
+	}
 };
 
 // Keeping capitalizeString as a separate function, make it reusable everywhere
@@ -55,7 +74,7 @@ const sortUserCards = (userData: dataTypes.User[], category: string, isAscending
 	});
 };
 
-const handleCardSort = (
+const handleCardSorting = (
 	sortFunction: (userData: dataTypes.User[], category: string, isAscending: boolean) => dataTypes.User[],
 	userData: dataTypes.User[],
 	category: string,
@@ -66,4 +85,14 @@ const handleCardSort = (
 	stateSetter(sortedUserData);
 };
 
-export { handleInputChange, handleButtonClick, capitalizeString, listRequiredCategories, sortUserCards, handleCardSort };
+export {
+	handleText,
+	handleUserData,
+	handleButtonClick,
+	handleDisplay,
+	handleDefaultName,
+	capitalizeString,
+	listRequiredCategories,
+	sortUserCards,
+	handleCardSorting,
+};

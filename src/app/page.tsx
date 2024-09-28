@@ -8,7 +8,15 @@ import Button from './components/Button';
 import Dropdown from './components/Dropdown';
 import Card from './components/Card';
 // Helpers
-import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helperFunctions';
+import {
+	handleText,
+	handleUserData,
+	handleButtonClick,
+	sortUserCards,
+	handleCardSorting,
+	handleDisplay,
+	handleDefaultName,
+} from './utils/helperFunctions';
 // Types
 import * as dataTypes from '@/types/data';
 import DropdownList from './components/DropdownList';
@@ -66,14 +74,15 @@ export default function Dashboard() {
 		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
 	});
 
-	const handleDisplay = () => {
-		setIsOpen(!isOpen);
+	// Event handler functions
+	const handleDropdownClick = (): void => {
+		handleDisplay(isOpen, setIsOpen);
+		handleDefaultName(isOpen, sortCategoryName, SORT_BY, setSortCategoryName);
+	};
 
-		if (isOpen === false) {
-			if (sortCategoryName !== SORT_BY) {
-				setSortCategoryName(SORT_BY);
-			}
-		}
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+		handleText(setSearch, e);
+		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
 	};
 
 	const handleClickOutside = (e: MouseEvent) => {
@@ -93,14 +102,7 @@ export default function Dashboard() {
 						type={'search'}
 						name={'search'}
 						value={search}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {
-							handleInputChange(setSearch, e);
-							if (search !== '') {
-								setFilteredUserData(filteredData);
-							} else {
-								setFilteredUserData(userAPIData);
-							}
-						}}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
 					/>
 					<Button
 						className={styles.searchButton}
@@ -116,7 +118,7 @@ export default function Dashboard() {
 							dropdownHeadClass={styles.dropdownHead}
 							style={isOpen ? { borderRadius: '0.5rem 0.5rem 0 0' } : { borderRadius: '0.5rem' }}
 							text={sortCategoryName}
-							onClick={handleDisplay}
+							onClick={handleDropdownClick}
 						>
 							{isOpen && (
 								<DropdownList
@@ -139,7 +141,7 @@ export default function Dashboard() {
 							disabled={sortCategoryName === SORT_BY}
 							onClick={() => {
 								setIsAscending(!isAscending);
-								handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
 							}}
 							content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 						/>

@@ -1,4 +1,4 @@
-import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSort } from '@/app/utils/helperFunctions';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
 import { v4 as uuidv4 } from 'uuid';
 
 function DropdownList(props: any) {
@@ -27,7 +27,7 @@ function DropdownList(props: any) {
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								setIsAscending(isAscending);
-								handleCardSort(sortUserCards, data, category, isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, data, category, isAscending, setUserAPIData);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}
