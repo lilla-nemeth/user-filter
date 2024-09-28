@@ -1,13 +1,15 @@
-export interface User {
+interface User {
 	id: number;
 	name: string;
+	username: string;
 	email: string;
+	address: UserAddress;
 	phone: string;
 	website: string;
-	address: UserAddress[];
+	company: UserCompany;
 }
 
-export interface UserAddress {
+interface UserAddress {
 	street: string;
 	suite: string;
 	city: string;
@@ -15,7 +17,15 @@ export interface UserAddress {
 	geo: UserLocation[];
 }
 
-export interface UserLocation {
+interface UserLocation {
 	lat: string;
 	lng: string;
 }
+
+interface UserCompany {
+	name: string;
+	catchPhrase: string;
+	bs: string;
+}
+
+export type { User, UserAddress, UserLocation, UserCompany };

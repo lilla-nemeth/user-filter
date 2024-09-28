@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import '@/app/styles/global.scss';
-import { Dela_Gothic_One } from 'next/font/google';
 import { Roboto } from 'next/font/google';
 
 export const metadata: Metadata = {

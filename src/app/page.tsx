@@ -1,4 +1,5 @@
 'use client';
+
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 // Styles
 import styles from '@/app/styles/Dashboard.module.scss';
@@ -8,21 +9,29 @@ import Button from './components/Button';
 import Dropdown from './components/Dropdown';
 import Card from './components/Card';
 // Helpers
-import { handleInputChange, handleButtonClick, sortUserCards, handleCardSort } from './utils/helpers';
+import {
+	handleText,
+	handleUserData,
+	handleButtonClick,
+	sortUserCards,
+	handleCardSorting,
+	handleDisplay,
+	handleDefaultName,
+} from './utils/helperFunctions';
 // Types
-import * as dataTypes from '@/types/data';
+import { User } from '@/types/data';
 import DropdownList from './components/DropdownList';
-import AscendingIcon from './components/icons/AscendingIcon';
+import SortingIcon from './components/icons/SortingIcon';
 // Constants
 import { SORT_BY } from '@/types/constants';
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
 	const [search, setSearch] = useState('');
-	const [userAPIData, setUserAPIData] = useState<dataTypes.User[]>([]);
-	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
+	const [userAPIData, setUserAPIData] = useState<User[]>([]);
+	const [filteredUserData, setFilteredUserData] = useState<User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [sortCategoryName, setSortCategoryName] = useState<any>(SORT_BY);
+	const [sortCategoryName, setSortCategoryName] = useState<string>(SORT_BY);
 	const [isAscending, setIsAscending] = useState<boolean>(true);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const acceptedSortCategories: string[] = ['name', 'email'];
@@ -35,7 +44,7 @@ export default function Dashboard() {
 					// when failed to fetch data, user friendly error message is displayed:
 					throw new Error('Something went wrong, please come back later.');
 				}
-				const users: dataTypes.User[] = await res.json();
+				const users: User[] = await res.json();
 				setUserAPIData(users);
 				setFilteredUserData(userAPIData);
 			} catch (err) {
@@ -46,10 +55,14 @@ export default function Dashboard() {
 	}, []);
 
 	useEffect(() => {
+		const handleClickOutside = (e: MouseEvent) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+				setIsOpen(false);
+			}
+		};
+
 		if (isOpen) {
 			document.addEventListener('mousedown', handleClickOutside);
-		} else {
-			document.removeEventListener('mousedown', handleClickOutside);
 		}
 
 		return () => {
@@ -57,30 +70,66 @@ export default function Dashboard() {
 		};
 	}, [isOpen]);
 
+	// Event handler functions
+	const handleDropdownClick = (): void => {
+		handleDisplay(isOpen, setIsOpen);
+		handleDefaultName(isOpen, sortCategoryName, SORT_BY, setSortCategoryName);
+	};
+
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+		handleText(setSearch, e);
+		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
+	};
+
+	const returnCards = (data: User[]): React.ReactNode => {
+		return (
+			<>
+				{data.map((user) => (
+					<Card
+						key={user.id}
+						cardClass={styles.card}
+						valueClass={styles.cardValues}
+						categoryClass={styles.cardCategories}
+						fullNameClass={styles.cardFullName}
+						cardCategoryFullName={styles.cardCategoryFullName}
+						user={user}
+					/>
+				))}
+			</>
+		);
+	};
+
 	if (error) {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.filter((user: any) => {
-		// address won't work with this option, but other parts are searchable
-		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
-	});
+	const filteredData = userAPIData.reduce((acc: User[], user: User): User[] => {
+		const searchToLowerCase = search.toLowerCase();
 
-	const handleDisplay = () => {
-		setIsOpen(!isOpen);
+		const matches = Object.keys(user).some((key) => {
+			const userValue = user[key as keyof User];
 
-		if (isOpen === false) {
-			if (sortCategoryName !== SORT_BY) {
-				setSortCategoryName(SORT_BY);
+			// Check if it's a string
+			if (typeof userValue === 'string') {
+				return userValue.toLowerCase().includes(searchToLowerCase);
 			}
-		}
-	};
 
-	const handleClickOutside = (e: MouseEvent) => {
-		if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-			setIsOpen(false);
+			// Check if it's an object
+			if (typeof userValue === 'object' && userValue !== null) {
+				return Object.values(userValue).some((nestedValue) => {
+					return typeof nestedValue === 'string' && nestedValue.toLowerCase().includes(searchToLowerCase);
+				});
+			}
+
+			return false;
+		});
+
+		if (matches) {
+			acc.push(user);
 		}
-	};
+
+		return acc;
+	}, []);
 
 	return (
 		<div className={styles.contentWrapper}>
@@ -93,14 +142,7 @@ export default function Dashboard() {
 						type={'search'}
 						name={'search'}
 						value={search}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {
-							handleInputChange(setSearch, e);
-							if (search !== '') {
-								setFilteredUserData(filteredData);
-							} else {
-								setFilteredUserData(userAPIData);
-							}
-						}}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
 					/>
 					<Button
 						className={styles.searchButton}
@@ -116,7 +158,7 @@ export default function Dashboard() {
 							dropdownHeadClass={styles.dropdownHead}
 							style={isOpen ? { borderRadius: '0.5rem 0.5rem 0 0' } : { borderRadius: '0.5rem' }}
 							text={sortCategoryName}
-							onClick={handleDisplay}
+							onClick={handleDropdownClick}
 						>
 							{isOpen && (
 								<DropdownList
@@ -137,44 +179,19 @@ export default function Dashboard() {
 						<Button
 							className={styles.orderButton}
 							disabled={sortCategoryName === SORT_BY}
+							type={'button'}
 							onClick={() => {
 								setIsAscending(!isAscending);
-								handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
 							}}
-							content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
+							content={<SortingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 						/>
 					</div>
 				</div>
 			</div>
-			<div className={styles.cardWrapper}>
-				{search.length > 1
-					? filteredUserData.map((user: any) => {
-							return (
-								<Card
-									cardClass={styles.card}
-									valueClass={styles.cardValues}
-									categoryClass={styles.cardCategories}
-									fullNameClass={styles.cardFullName}
-									cardCategoryFullName={styles.cardCategoryFullName}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })
-					: userAPIData.map((user: any) => {
-							return (
-								<Card
-									cardClass={styles.card}
-									valueClass={styles.cardValues}
-									categoryClass={styles.cardCategories}
-									fullNameClass={styles.cardFullName}
-									cardCategoryFullName={styles.cardCategoryFullName}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })}
-			</div>
+			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userAPIData)}</div>
 		</div>
 	);
-}
+};
+
+export default Dashboard;

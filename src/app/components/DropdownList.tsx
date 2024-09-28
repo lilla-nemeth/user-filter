@@ -1,7 +1,9 @@
-import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSort } from '@/app/utils/helpers';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
+import { DropdownListProps } from '@/types/props';
 import { v4 as uuidv4 } from 'uuid';
+import { User } from '@/types/data';
 
-function DropdownList(props: any) {
+const DropdownList: React.FC<DropdownListProps> = (props) => {
 	const {
 		dropdownListClass,
 		dropdownItemClass,
@@ -14,7 +16,7 @@ function DropdownList(props: any) {
 		style,
 	} = props;
 
-	return data.map((el: any) => {
+	return data.map((el: User) => {
 		return (
 			<div key={el.id} className={dropdownListClass} style={style}>
 				{Object.keys(el).map((item) => {
@@ -27,7 +29,7 @@ function DropdownList(props: any) {
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								setIsAscending(isAscending);
-								handleCardSort(sortUserCards, data, category, isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, data, category, isAscending, setUserAPIData);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}
@@ -37,6 +39,6 @@ function DropdownList(props: any) {
 			</div>
 		);
 	});
-}
+};
 
 export default DropdownList;

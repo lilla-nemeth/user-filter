@@ -1,4 +1,6 @@
-function Dropdown(props: any) {
+import { DropdownProps } from '@/types/props';
+
+const Dropdown: React.FC<DropdownProps> = (props) => {
 	const { dropdownClass, dropdownHeadClass, text, onClick, style } = props;
 
 	return (
@@ -9,6 +11,6 @@ function Dropdown(props: any) {
 			{props.children}
 		</div>
 	);
-}
+};
 
 export default Dropdown;
