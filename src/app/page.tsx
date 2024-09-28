@@ -1,4 +1,5 @@
 'use client';
+
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 // Styles
 import styles from '@/app/styles/Dashboard.module.scss';
@@ -54,25 +55,20 @@ export default function Dashboard() {
 	}, []);
 
 	useEffect(() => {
+		const handleClickOutside = (e: MouseEvent) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+				setIsOpen(false);
+			}
+		};
+
 		if (isOpen) {
 			document.addEventListener('mousedown', handleClickOutside);
-		} else {
-			document.removeEventListener('mousedown', handleClickOutside);
 		}
 
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [isOpen]);
-
-	if (error) {
-		return <div className='errorCard'>{error}</div>;
-	}
-
-	const filteredData = userAPIData.filter((user: any) => {
-		// address won't work with this option, but other parts are searchable
-		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
-	});
 
 	// Event handler functions
 	const handleDropdownClick = (): void => {
@@ -85,11 +81,32 @@ export default function Dashboard() {
 		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
 	};
 
-	const handleClickOutside = (e: MouseEvent) => {
-		if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-			setIsOpen(false);
-		}
+	const returnCards = (data: dataTypes.User[]): React.ReactNode => {
+		return (
+			<>
+				{data.map((user) => (
+					<Card
+						key={user.id}
+						cardClass={styles.card}
+						valueClass={styles.cardValues}
+						categoryClass={styles.cardCategories}
+						fullNameClass={styles.cardFullName}
+						cardCategoryFullName={styles.cardCategoryFullName}
+						user={user}
+					/>
+				))}
+			</>
+		);
 	};
+
+	if (error) {
+		return <div className='errorCard'>{error}</div>;
+	}
+
+	const filteredData = userAPIData.filter((user: any) => {
+		// it works with all categories except address (which wasn't part of the task)
+		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
+	});
 
 	return (
 		<div className={styles.contentWrapper}>
@@ -148,35 +165,7 @@ export default function Dashboard() {
 					</div>
 				</div>
 			</div>
-			<div className={styles.cardWrapper}>
-				{search.length > 1
-					? filteredUserData.map((user: any) => {
-							return (
-								<Card
-									cardClass={styles.card}
-									valueClass={styles.cardValues}
-									categoryClass={styles.cardCategories}
-									fullNameClass={styles.cardFullName}
-									cardCategoryFullName={styles.cardCategoryFullName}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })
-					: userAPIData.map((user: any) => {
-							return (
-								<Card
-									cardClass={styles.card}
-									valueClass={styles.cardValues}
-									categoryClass={styles.cardCategories}
-									fullNameClass={styles.cardFullName}
-									cardCategoryFullName={styles.cardCategoryFullName}
-									user={user}
-									key={user.id}
-								/>
-							);
-					  })}
-			</div>
+			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userAPIData)}</div>
 		</div>
 	);
 }
