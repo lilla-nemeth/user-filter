@@ -110,32 +110,38 @@ export default function Dashboard() {
 					/>
 				</div>
 				<div className={styles.sortContainer}>
-				<div ref={dropdownRef} className={styles.dropdownWrapper}>
-					<Dropdown dropdownClass={styles.dropdown} dropdownHeadClass={styles.dropdownHead} text={sortCategoryName} onClick={handleDisplay}>
-						{isOpen && (
-							<DropdownList
-								dropdownListClass={styles.dropdownList}
-								dropdownItemClass={styles.dropdownItem}
-								data={userAPIData}
-								setSortCategoryName={setSortCategoryName}
-								acceptedCategories={acceptedSortCategories}
-								setUserAPIData={setUserAPIData}
-								isAscending={isAscending}
-								setIsAscending={setIsAscending}
-							/>
-						)}
-					</Dropdown>
-				</div>
-				<div className={styles.orderButtonWrapper}>
-					<Button
-						className={styles.orderButton}
-						onClick={() => {
-							setIsAscending(!isAscending);
-							handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
-						}}
-						content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
-					/>
-				</div>
+					<div ref={dropdownRef} className={styles.dropdownWrapper}>
+						<Dropdown
+							dropdownClass={styles.dropdown}
+							dropdownHeadClass={styles.dropdownHead}
+							text={sortCategoryName}
+							onClick={handleDisplay}
+						>
+							{isOpen && (
+								<DropdownList
+									dropdownListClass={styles.dropdownList}
+									dropdownItemClass={styles.dropdownItem}
+									data={userAPIData}
+									setSortCategoryName={setSortCategoryName}
+									acceptedCategories={acceptedSortCategories}
+									setUserAPIData={setUserAPIData}
+									isAscending={isAscending}
+									setIsAscending={setIsAscending}
+								/>
+							)}
+						</Dropdown>
+					</div>
+					<div className={styles.orderButtonWrapper}>
+						<Button
+							className={styles.orderButton}
+							disabled={sortCategoryName === SORT_BY}
+							onClick={() => {
+								setIsAscending(!isAscending);
+								handleCardSort(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+							}}
+							content={<AscendingIcon className={styles.buttonIcon} isAscending={isAscending} />}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className={styles.cardContainer}>
