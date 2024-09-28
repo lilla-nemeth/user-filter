@@ -103,9 +103,29 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.filter((user: any) => {
-		// it works with all categories except address (which wasn't part of the task)
-		return Object.keys(user).some((key: string) => user[key].toString().toLowerCase().includes(search.toLowerCase()));
+	const filteredData = userAPIData.filter((user: dataTypes.User): boolean => {
+		const searchToLowerCase = search.toLowerCase();
+
+		return Object.keys(user).some((key: string) => {
+			const userValue = user[key as keyof dataTypes.User];
+			let isSearchKeyWordMatch;
+			// if data is not nested
+			if (typeof userValue === 'string') {
+				isSearchKeyWordMatch = userValue.toString().toLowerCase().includes(searchToLowerCase);
+				return isSearchKeyWordMatch;
+			}
+
+			// if data is nested (like address or company)
+			if (typeof userValue === 'object' && userValue !== null) {
+				return Object.values(userValue).some((nestedValue: string) => {
+					if (typeof nestedValue === 'string') {
+						isSearchKeyWordMatch = nestedValue.toString().toLowerCase().includes(searchToLowerCase);
+						return isSearchKeyWordMatch;
+					}
+				});
+			}
+			return false;
+		});
 	});
 
 	return (
