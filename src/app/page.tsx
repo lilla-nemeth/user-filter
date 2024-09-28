@@ -103,28 +103,33 @@ const Dashboard: React.FC = () => {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.filter((user: User): boolean => {
+	const filteredData = userAPIData.reduce((acc: User[], user: User): User[] => {
 		const searchToLowerCase = search.toLowerCase();
 
-		return Object.keys(user).some((key: string) => {
+		const matches = Object.keys(user).some((key) => {
 			const userValue = user[key as keyof User];
 
-			// if data is not nested
+			// Check if it's a string
 			if (typeof userValue === 'string') {
-				return userValue.toString().toLowerCase().includes(searchToLowerCase);
+				return userValue.toLowerCase().includes(searchToLowerCase);
 			}
 
-			// if data is nested (like address or company)
+			// Check if it's an object
 			if (typeof userValue === 'object' && userValue !== null) {
-				return Object.values(userValue).some((nestedValue: string) => {
-					if (typeof nestedValue === 'string') {
-						return nestedValue.toString().toLowerCase().includes(searchToLowerCase);
-					}
+				return Object.values(userValue).some((nestedValue) => {
+					return typeof nestedValue === 'string' && nestedValue.toLowerCase().includes(searchToLowerCase);
 				});
 			}
+
 			return false;
 		});
-	});
+
+		if (matches) {
+			acc.push(user);
+		}
+
+		return acc;
+	}, []);
 
 	return (
 		<div className={styles.contentWrapper}>
