@@ -132,22 +132,22 @@ body {
 h1 {
 	display: flex;
 	justify-content: center;
-	padding: 40px;
+	padding: $l-padding;
 	font-size: 3rem;
 	color: $black;
 }
 
 td {
-	margin: 0.25rem;
+	margin: $xs-margin;
 }
 
 .errorCard {
-	background-color: $white;
-	color: $black;
-	padding: $card-padding;
 	position: fixed;
-	border-radius: $card-border-radius;
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+	border-radius: $l-border-radius;
+	background-color: $white;
+	color: $black;
+	padding: $l-padding;
 }

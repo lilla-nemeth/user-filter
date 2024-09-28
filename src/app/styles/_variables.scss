@@ -9,21 +9,39 @@ $grey: rgba(124, 124, 124, 1);
 /* Box shadow */
 $box-shadow: -1px 20px 33px 3px rgba(0, 0, 0, 0.13);
 
-/* Font variables */
+/* Font */
 $base-font-size: 1rem;
+$title-font-size: 1.25rem;
 $font-dela-gothic-one: 'Dela Gothic One', sans-serif;
 
-/* Card variables */
-$card-padding: 3rem;
-$card-border-radius: 3rem;
-$card-margin: 1rem;
+/* Border radius */
+$s-border-radius: 0.5rem;
+$s-border-radius-left: 0.5rem 0 0 0.5rem;
+$s-border-radius-right: 0 0.5rem 0.5rem 0;
+$m-border-radius: 1.5rem;
+$l-border-radius: 3rem;
+$l-border-radius-left: 3rem 0 0 3rem;
 
-/* Input variables */
-$input-padding: 1.2rem;
-$input-width: 50%;
-$input-border: none;
+/* Gap */
+$s-gap: 1rem;
+$m-gap: 2rem;
 
-/* Device breakpoints */
+/* Margin */
+$xs-margin: 0.25rem;
+$s-margin: 1rem;
+$s-margin-left-right: 0 1rem;
+$m-margin-bottom: 0 0 2rem 0;
+$m-margin-top: 2rem 0 0 0;
+
+/* Padding */
+$xxs-padding-top-bottom: 0.5rem 0;
+$xs-padding: 0.8rem;
+$s-padding: 1rem;
+$s-padding-bottom: 0 0 1rem 0;
+$m-padding: 2rem;
+$l-padding: 3rem;
+
+/* Media query breakpoints */
 
 // Extra Extra Small
 $xxs-device-max: 575px;

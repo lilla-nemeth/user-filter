@@ -4,57 +4,56 @@
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
-	margin-top: 2rem;
+	margin: $m-margin-top;
+	gap: $m-gap;
 }
 
 .cardWrapper:last-child {
-	margin-bottom: 2rem;
+	margin: $m-margin-bottom;
 }
 
 .card {
 	display: flex;
 	background-color: $white;
-	border-radius: $card-border-radius;
-	margin: 0.5rem 1rem;
+	border-radius: $l-border-radius;
+	margin: $s-margin-left-right;
 	box-shadow: $box-shadow;
 }
 
-.cardCategories {
+.cardCategories,
+.cardValues {
 	display: flex;
-	width: 30%;
 	flex-direction: column;
-	border-radius: 3rem 0 0 3rem;
-	background-color: $secondary-color;
-	color: $black;
-	padding: 2rem;
 	word-wrap: break-word;
+	padding: $m-padding;
+}
+
+.cardCategories {
+	width: 30%;
+	border-radius: $l-border-radius-left;
+	background-color: $secondary-color;
 }
 
 .cardValues {
-	display: flex;
-	color: $black;
 	width: 70%;
-	flex-direction: column;
-	padding: 2rem;
-	word-wrap: break-word;
 }
 
 .cardCategoryFullName,
 .cardFullName {
-	padding: 0 0 1rem 0;
-	vertical-align: bottom;
 	line-height: 2rem;
+	vertical-align: bottom;
+	padding: $s-padding-bottom;
 }
 
 .cardFullName {
-	font-size: 1.25rem;
+	font-size: $title-font-size;
 	font-family: $font-dela-gothic-one;
 }
 
 /* Filter styles - Searching & Sorting */
 .filterContainer {
 	display: flex;
-	padding: 1rem;
+	padding: $s-padding;
 	justify-content: space-evenly;
 }
 
@@ -62,32 +61,32 @@
 	display: flex;
 	width: 100%;
 	box-shadow: $box-shadow;
-	border-radius: 0.5rem;
+	border-radius: $s-border-radius;
 }
 
 .searchInput,
 .searchButton {
-	border: $input-border;
+	border: none;
 }
 
 .searchInput {
 	width: 100%;
-	padding: $input-padding;
-	border-radius: 0.5rem 0 0 0.5rem;
+	padding: $s-padding;
+	border-radius: $s-border-radius-left;
 }
 
 .searchButton {
-	border-radius: 0 0.5rem 0.5rem 0;
 	width: 7em;
-	padding: 1.1rem;
-	background-color: $secondary-color;
-	font-size: 1rem;
-	color: $tertiary-color;
 	cursor: pointer;
+	border-radius: $s-border-radius-right;
+	padding: $s-padding;
+	background-color: $secondary-color;
+	font-size: $base-font-size;
+	color: $tertiary-color;
 }
 
 .searchButton:hover {
-	color: $black;
+	color: unset;
 }
 
 .sortContainer {
@@ -97,21 +96,22 @@
 .dropdownWrapper {
 	display: flex;
 	justify-content: center;
-	margin: 0 1rem 0 1rem;
+	margin: $s-margin-left-right;
 	box-shadow: $box-shadow;
-	border-radius: 0.5rem;
+	border-radius: $s-border-radius;
 }
 
 .dropdown {
-	width: 300px;
+	width: 20em;
 	z-index: 1000;
 	cursor: pointer;
-	color: $tertiary-color;
 	position: relative;
+	color: $tertiary-color;
 }
 
 .dropdownHead {
-	padding: $input-padding;
+	// special case:
+	padding: 1.2rem;
 	background-color: $secondary-color;
 }
 
@@ -121,10 +121,10 @@
 }
 
 .dropdownList {
-	background-color: $white;
 	position: absolute;
 	width: inherit;
 	border: 0.4rem solid $secondary-color;
+	background-color: $white;
 }
 
 .dropdownItem {
@@ -132,7 +132,7 @@
 }
 
 .dropdownItem:hover {
-	border-radius: 0.5rem;
+	border-radius: $s-border-radius;
 }
 
 .dropdownItem:empty {
@@ -144,17 +144,17 @@
 	justify-content: flex-start;
 	flex-direction: column;
 	box-shadow: $box-shadow;
-	border-radius: 0.5rem;
+	border-radius: $s-border-radius;
 }
 
 .orderButton {
-	background-color: $secondary-color;
-	padding: 0.8rem;
-	border-style: $input-border;
-	border-radius: 0.5rem;
+	cursor: pointer;
 	height: 3.4rem;
 	width: 3.4rem;
-	cursor: pointer;
+	padding: 0.8rem;
+	border-style: none;
+	background-color: $secondary-color;
+	border-radius: $s-border-radius;
 }
 
 .buttonIcon {
@@ -181,7 +181,7 @@
 
 	.cardValues {
 		width: 100%;
-		padding: 2rem;
+		padding: $m-padding;
 	}
 }
 
@@ -195,17 +195,17 @@
 // M devices - max. 991px
 @media (max-width: $s-device-max) {
 	.filterContainer {
-		padding: unset;
-		margin: 1rem;
 		display: flex;
 		flex-direction: column;
+		padding: unset;
+		margin: $s-margin;
 	}
 
 	.sortContainer {
-		padding: 0.5rem 0;
 		justify-content: space-between;
-		gap: 1rem;
 		padding: 1rem 0;
+		gap: $s-gap;
+		padding: $xxs-padding-top-bottom;
 	}
 
 	.searchWrapper {
@@ -229,7 +229,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		border-radius: 0.5rem;
+		border-radius: $s-border-radius;
 	}
 }
 
