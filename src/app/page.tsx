@@ -19,7 +19,7 @@ import {
 	handleDefaultName,
 } from './utils/helperFunctions';
 // Types
-import * as dataTypes from '@/types/data';
+import { User } from '@/types/data';
 import DropdownList from './components/DropdownList';
 import SortingIcon from './components/icons/SortingIcon';
 // Constants
@@ -27,8 +27,8 @@ import { SORT_BY } from '@/types/constants';
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
-	const [userAPIData, setUserAPIData] = useState<dataTypes.User[]>([]);
-	const [filteredUserData, setFilteredUserData] = useState<dataTypes.User[]>([]);
+	const [userAPIData, setUserAPIData] = useState<User[]>([]);
+	const [filteredUserData, setFilteredUserData] = useState<User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [sortCategoryName, setSortCategoryName] = useState<string>(SORT_BY);
@@ -44,7 +44,7 @@ export default function Dashboard() {
 					// when failed to fetch data, user friendly error message is displayed:
 					throw new Error('Something went wrong, please come back later.');
 				}
-				const users: dataTypes.User[] = await res.json();
+				const users: User[] = await res.json();
 				setUserAPIData(users);
 				setFilteredUserData(userAPIData);
 			} catch (err) {
@@ -81,7 +81,7 @@ export default function Dashboard() {
 		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
 	};
 
-	const returnCards = (data: dataTypes.User[]): React.ReactNode => {
+	const returnCards = (data: User[]): React.ReactNode => {
 		return (
 			<>
 				{data.map((user) => (
@@ -103,11 +103,11 @@ export default function Dashboard() {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.filter((user: dataTypes.User): boolean => {
+	const filteredData = userAPIData.filter((user: User): boolean => {
 		const searchToLowerCase = search.toLowerCase();
 
 		return Object.keys(user).some((key: string) => {
-			const userValue = user[key as keyof dataTypes.User];
+			const userValue = user[key as keyof User];
 
 			// if data is not nested
 			if (typeof userValue === 'string') {

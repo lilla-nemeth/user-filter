@@ -1,22 +1,17 @@
 import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
 // Types
-import * as dataTypes from '@/types/data';
+import { User } from '@/types/data';
 
 const handleText = (stateSetter: Dispatch<SetStateAction<string>>, e: ChangeEvent<HTMLInputElement>): void => {
 	stateSetter(e.target.value);
 };
 
-const handleUserData = (
-	searchStr: string,
-	stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>,
-	filteredData: dataTypes.User[],
-	apiData: dataTypes.User[]
-): void => {
+const handleUserData = (searchStr: string, stateSetter: Dispatch<SetStateAction<User[]>>, filteredData: User[], apiData: User[]): void => {
 	searchStr !== '' ? stateSetter(filteredData) : stateSetter(apiData);
 };
 
-const handleButtonClick = (stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>, filteredData: dataTypes.User[]): void => {
+const handleButtonClick = (stateSetter: Dispatch<SetStateAction<User[]>>, filteredData: User[]): void => {
 	stateSetter(filteredData);
 };
 
@@ -42,7 +37,7 @@ const listRequiredCategories = (key: string, stringArray: string[], callback: (s
 	return '';
 };
 
-const sortUserCards = (userData: dataTypes.User[], category: string, isAscending: boolean = true): dataTypes.User[] => {
+const sortUserCards = (userData: User[], category: string, isAscending: boolean = true): User[] => {
 	return [...userData].sort((a, b) => {
 		let valueA: string | undefined;
 		let valueB: string | undefined;
@@ -75,11 +70,11 @@ const sortUserCards = (userData: dataTypes.User[], category: string, isAscending
 };
 
 const handleCardSorting = (
-	sortFunction: (userData: dataTypes.User[], category: string, isAscending: boolean) => dataTypes.User[],
-	userData: dataTypes.User[],
+	sortFunction: (userData: User[], category: string, isAscending: boolean) => User[],
+	userData: User[],
 	category: string,
 	isAscending: boolean,
-	stateSetter: Dispatch<SetStateAction<dataTypes.User[]>>
+	stateSetter: Dispatch<SetStateAction<User[]>>
 ): void => {
 	const sortedUserData = sortFunction(userData, category, isAscending);
 	stateSetter(sortedUserData);

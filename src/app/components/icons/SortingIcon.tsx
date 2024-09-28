@@ -1,4 +1,6 @@
-function SortingIcon(props: any) {
+import { SortingIconProps } from "@/types/props";
+
+function SortingIcon(props: SortingIconProps) {
 	const { className, isAscending } = props;
 
 	return (

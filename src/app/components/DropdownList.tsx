@@ -1,6 +1,7 @@
 import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
 import { DropdownListProps } from '@/types/props';
 import { v4 as uuidv4 } from 'uuid';
+import { User } from '@/types/data';
 
 function DropdownList(props: DropdownListProps) {
 	const {
@@ -15,7 +16,7 @@ function DropdownList(props: DropdownListProps) {
 		style,
 	} = props;
 
-	return data.map((el: any) => {
+	return data.map((el: User) => {
 		return (
 			<div key={el.id} className={dropdownListClass} style={style}>
 				{Object.keys(el).map((item) => {

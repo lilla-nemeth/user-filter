@@ -52,6 +52,9 @@ interface InputProps {
 	onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
+interface SortingIconProps {
+	className?: ClassNameType;
+	isAscending: boolean;
+}
 
-
-export type { ButtonProps, CardProps, DropdownProps, DropdownListProps, InputProps };
+export type { ButtonProps, CardProps, DropdownProps, DropdownListProps, InputProps, SortingIconProps };
