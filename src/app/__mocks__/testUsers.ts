@@ -55,7 +55,7 @@ const mockApiUsers: User[] = [
 		id: 2,
 		name: 'John Doe',
 		username: 'John',
-		email: 'johndoe@megacorp.com',
+		email: 'johndoe@solutioncorp.com',
 		address: {
 			street: '245 Cold Storage Rd',
 			suite: 'Suite 637',

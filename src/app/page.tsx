@@ -17,6 +17,7 @@ import {
 	handleCardSorting,
 	handleDisplay,
 	handleDefaultName,
+	fetchUsers,
 } from './utils/helperFunctions';
 // Types
 import { User } from '@/types/data';
@@ -37,21 +38,7 @@ const Dashboard: React.FC = () => {
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
 	useEffect(() => {
-		const fetchUsers = async () => {
-			try {
-				const res = await fetch('http://localhost:3000/api/users');
-				if (!res.ok) {
-					const errorData = await res.json();
-					throw new Error(errorData.error || 'Failed to fetch user data');
-				}
-				const users: User[] = await res.json();
-				setUserApiData(users);
-				setFilteredUserData(userApiData);
-			} catch (err) {
-				setError((err as Error).message);
-			}
-		};
-		fetchUsers();
+		fetchUsers(setUserApiData, userApiData, setFilteredUserData, setError);
 	}, []);
 
 	useEffect(() => {
