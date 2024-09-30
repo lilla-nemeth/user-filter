@@ -2,11 +2,13 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import {
 	capitalizeString,
 	handleButtonClick,
+	handleCardSorting,
 	handleDefaultName,
 	handleDisplay,
 	handleText,
 	handleUserData,
 	listRequiredCategories,
+	sortUserCards,
 } from '../utils/helperFunctions';
 import { User } from '@/types/data';
 import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
@@ -124,5 +126,31 @@ describe('listRequiredCategories', () => {
 		const result = listRequiredCategories(key, stringArray, callback);
 		expect(result).toBe('');
 		expect(callback).not.toHaveBeenCalled();
+	});
+});
+
+describe('sortUserCards', () => {
+	it('should sort users by name in ascending order', () => {
+		const sortedUsers = sortUserCards(mockApiUsers, 'Name', true);
+		expect(sortedUsers[0].name).toBe('Jane Doe');
+		expect(sortedUsers[1].name).toBe('John Doe');
+	});
+
+	it('should sort users by name in descending order', () => {
+		const sortedUsers = sortUserCards(mockApiUsers, 'Name', false);
+		expect(sortedUsers[0].name).toBe('John Doe');
+		expect(sortedUsers[1].name).toBe('Jane Doe');
+	});
+
+	it('should sort users by email in ascending order', () => {
+		const sortedUsers = sortUserCards(mockApiUsers, 'Email', true);
+		expect(sortedUsers[0].email).toBe('janedoe@megacorp.com');
+		expect(sortedUsers[1].email).toBe('johndoe@solutioncorp.com');
+	});
+
+	it('should sort users by email in descending order', () => {
+		const sortedUsers = sortUserCards(mockApiUsers, 'Email', false);
+		expect(sortedUsers[0].email).toBe('johndoe@solutioncorp.com');
+		expect(sortedUsers[1].email).toBe('janedoe@megacorp.com');
 	});
 });
