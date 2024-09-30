@@ -6,6 +6,7 @@ import {
 	handleDisplay,
 	handleText,
 	handleUserData,
+	listRequiredCategories,
 } from '../utils/helperFunctions';
 import { User } from '@/types/data';
 import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
@@ -101,5 +102,27 @@ describe('handleDefaultName', () => {
 
 		handleDefaultName(isOpen, categoryName, str, setStateMock);
 		expect(setStateMock).not.toHaveBeenCalled();
+	});
+});
+
+describe('listRequiredCategories', () => {
+	it('should return the capitalized format of object key when it matches with an element from the stringArray', () => {
+		const key = 'name';
+		const stringArray = ['name', 'email'];
+		const callback = jest.fn((str) => capitalizeString(str));
+
+		const result = listRequiredCategories(key, stringArray, callback);
+		expect(result).toBe('Name');
+		expect(callback).toHaveBeenCalledWith(key);
+	});
+
+	it('should return an empty string when the object key cannot be found in the stringArray', () => {
+		const key = 'hobby';
+		const stringArray = ['name', 'email'];
+		const callback = jest.fn();
+
+		const result = listRequiredCategories(key, stringArray, callback);
+		expect(result).toBe('');
+		expect(callback).not.toHaveBeenCalled();
 	});
 });
