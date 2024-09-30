@@ -1,6 +1,5 @@
 import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
 import { DropdownListProps } from '@/types/props';
-import { v4 as uuidv4 } from 'uuid';
 import { User } from '@/types/data';
 
 const DropdownList: React.FC<DropdownListProps> = (props) => {
@@ -22,7 +21,7 @@ const DropdownList: React.FC<DropdownListProps> = (props) => {
 				{Object.keys(el).map((item) => {
 					return (
 						<div
-							key={uuidv4()}
+							key={el.id}
 							className={dropdownItemClass}
 							onClick={() => {
 								// filter categories to show only required ones
