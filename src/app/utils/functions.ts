@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, ChangeEvent } from 'react';
-
 // Types
 import { User } from '@/types/data';
 
@@ -100,6 +99,16 @@ const fetchUsers = async (
 	}
 };
 
+const handleClickOutside = (
+	e: MouseEvent,
+	dropdownRef: React.RefObject<HTMLDivElement>,
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+	if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+		setIsOpen(false);
+	}
+};
+
 export {
 	handleText,
 	handleUserData,
@@ -111,4 +120,5 @@ export {
 	sortUserCards,
 	handleCardSorting,
 	fetchUsers,
+	handleClickOutside,
 };

@@ -10,7 +10,8 @@ import {
 	listRequiredCategories,
 	sortUserCards,
 	fetchUsers,
-} from '../utils/helperFunctions';
+	handleClickOutside,
+} from '../utils/functions';
 import { User } from '@/types/data';
 import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
 
@@ -220,4 +221,27 @@ describe('fetchUsers', () => {
 	});
 });
 
+describe('handleClickOutside', () => {
+	it('should call setIsOpen with false when click is outside the dropdown', () => {
+		const setIsOpenMock = jest.fn();
+		const dropdownRef = { current: document.createElement('div') };
 
+		const event = new MouseEvent('mousedown', { bubbles: true });
+		document.body.dispatchEvent(event);
+
+		handleClickOutside(event, dropdownRef, setIsOpenMock);
+		expect(setIsOpenMock).toHaveBeenCalledWith(false);
+	});
+
+	it('should not call setIsOpen when click is inside the dropdown', () => {
+		const setIsOpenMock = jest.fn();
+		const dropdownRef = { current: document.createElement('div') };
+		dropdownRef.current.appendChild(document.createElement('div'));
+
+		const event = new MouseEvent('mousedown', { bubbles: true });
+		dropdownRef.current.dispatchEvent(event);
+
+		handleClickOutside(event, dropdownRef, setIsOpenMock);
+		expect(setIsOpenMock).not.toHaveBeenCalled();
+	});
+});

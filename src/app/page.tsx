@@ -18,7 +18,8 @@ import {
 	handleDisplay,
 	handleDefaultName,
 	fetchUsers,
-} from './utils/helperFunctions';
+	handleClickOutside,
+} from './utils/functions';
 // Types
 import { User } from '@/types/data';
 import DropdownList from './components/DropdownList';
@@ -42,18 +43,14 @@ const Dashboard: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		const handleClickOutside = (e: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-				setIsOpen(false);
-			}
-		};
+		const clickOutside = (e: MouseEvent) => handleClickOutside(e, dropdownRef, setIsOpen);
 
 		if (isOpen) {
-			document.addEventListener('mousedown', handleClickOutside);
+			document.addEventListener('mousedown', clickOutside);
 		}
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('mousedown', clickOutside);
 		};
 	}, [isOpen]);
 

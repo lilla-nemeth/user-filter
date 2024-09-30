@@ -1,4 +1,4 @@
-import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/functions';
 import { DropdownListProps } from '@/types/props';
 import { User } from '@/types/data';
 
