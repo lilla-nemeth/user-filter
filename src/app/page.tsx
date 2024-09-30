@@ -27,7 +27,7 @@ import { SORT_BY } from '@/types/constants';
 
 const Dashboard: React.FC = () => {
 	const [search, setSearch] = useState('');
-	const [userAPIData, setUserAPIData] = useState<User[]>([]);
+	const [userApiData, setUserApiData] = useState<User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -45,8 +45,8 @@ const Dashboard: React.FC = () => {
 					throw new Error('Something went wrong, please come back later.');
 				}
 				const users: User[] = await res.json();
-				setUserAPIData(users);
-				setFilteredUserData(userAPIData);
+				setUserApiData(users);
+				setFilteredUserData(userApiData);
 			} catch (err) {
 				setError((err as Error).message);
 			}
@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		handleText(setSearch, e);
-		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
+		handleUserData(search, setFilteredUserData, filteredData, userApiData);
 	};
 
 	const returnCards = (data: User[]): React.ReactNode => {
@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.reduce((acc: User[], user: User): User[] => {
+	const filteredData = userApiData.reduce((acc: User[], user: User): User[] => {
 		const searchToLowerCase = search.toLowerCase();
 
 		const matches = Object.keys(user).some((key) => {
@@ -164,10 +164,10 @@ const Dashboard: React.FC = () => {
 								<DropdownList
 									dropdownListClass={styles.dropdownList}
 									dropdownItemClass={styles.dropdownItem}
-									data={userAPIData}
+									data={userApiData}
 									setSortCategoryName={setSortCategoryName}
 									acceptedCategories={acceptedSortCategories}
-									setUserAPIData={setUserAPIData}
+									setUserApiData={setUserApiData}
 									isAscending={isAscending}
 									setIsAscending={setIsAscending}
 									style={isOpen ? { borderRadius: '0 0 0.5rem 0.5rem ' } : { borderRadius: '0.5rem' }}
@@ -182,14 +182,14 @@ const Dashboard: React.FC = () => {
 							type={'button'}
 							onClick={() => {
 								setIsAscending(!isAscending);
-								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, userApiData, sortCategoryName, !isAscending, setUserApiData);
 							}}
 							content={<SortingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 						/>
 					</div>
 				</div>
 			</div>
-			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userAPIData)}</div>
+			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userApiData)}</div>
 		</div>
 	);
 };

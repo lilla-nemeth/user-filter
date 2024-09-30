@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { capitalizeString, handleText, handleUserData } from '../utils/helperFunctions';
 import { User } from '@/types/data';
-import { testAPIData, testFilteredData } from '../__mocks__/testUsers';
+import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
 
 test('capitalizeString', () => {
 	expect(capitalizeString('test string')).toBe('Test string');
@@ -25,14 +25,14 @@ describe('handleUserData', () => {
 	it('should call stateSetter with apiData when searchStr is not empty', () => {
 		const setStateMock: Dispatch<SetStateAction<User[]>> = jest.fn();
 
-		handleUserData('search', setStateMock, testFilteredData, testAPIData);
-		expect(setStateMock).toHaveBeenCalledWith(testFilteredData);
+		handleUserData('search', setStateMock, mockFilteredUsers, mockApiUsers);
+		expect(setStateMock).toHaveBeenCalledWith(mockFilteredUsers);
 	});
 
 	it('should call stateSetter with apiData when searchStr is empty', () => {
 		const setStateMock: Dispatch<SetStateAction<User[]>> = jest.fn();
 
-		handleUserData('', setStateMock, testFilteredData, testAPIData);
-		expect(setStateMock).toHaveBeenCalledWith(testAPIData);
+		handleUserData('', setStateMock, mockFilteredUsers, mockApiUsers);
+		expect(setStateMock).toHaveBeenCalledWith(mockApiUsers);
 	});
 });

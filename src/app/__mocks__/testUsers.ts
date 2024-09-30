@@ -1,7 +1,7 @@
 import { User } from '@/types/data';
 
 // test data for filtered and API data
-const testFilteredData: User[] = [
+const mockFilteredUsers: User[] = [
 	{
 		id: 1,
 		name: 'Jane Doe',
@@ -27,7 +27,7 @@ const testFilteredData: User[] = [
 	},
 ];
 
-const testAPIData: User[] = [
+const mockApiUsers: User[] = [
 	{
 		id: 1,
 		name: 'Jane Doe',
@@ -76,4 +76,4 @@ const testAPIData: User[] = [
 	},
 ];
 
-export { testAPIData, testFilteredData };
+export { mockApiUsers, mockFilteredUsers };

@@ -10,7 +10,7 @@ const DropdownList: React.FC<DropdownListProps> = (props) => {
 		data,
 		acceptedCategories,
 		setSortCategoryName,
-		setUserAPIData,
+		setUserApiData,
 		isAscending,
 		setIsAscending,
 		style,
@@ -29,7 +29,7 @@ const DropdownList: React.FC<DropdownListProps> = (props) => {
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								setIsAscending(isAscending);
-								handleCardSorting(sortUserCards, data, category, isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, data, category, isAscending, setUserApiData);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}
