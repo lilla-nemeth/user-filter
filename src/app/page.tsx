@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
 		};
 	}, [isOpen]);
 
-	// Event handler functions
+	// Event handler "wrapper" functions
 	const handleDropdownClick = (): void => {
 		handleDisplay(isOpen, setIsOpen);
 		handleDefaultName(isOpen, sortCategoryName, SORT_BY, setSortCategoryName);
