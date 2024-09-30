@@ -9,6 +9,7 @@ import {
 	handleUserData,
 	listRequiredCategories,
 	sortUserCards,
+	fetchUsers,
 } from '../utils/helperFunctions';
 import { User } from '@/types/data';
 import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
@@ -168,3 +169,55 @@ describe('handleCardSorting', () => {
 		expect(sortedUsers[0].name).toBe('Jane Doe');
 	});
 });
+
+describe('fetchUsers', () => {
+	let setUserApiData: jest.Mock;
+	let setFilteredUserData: jest.Mock;
+	let setError: jest.Mock;
+	const userApiData: User[] = [];
+
+	beforeEach(() => {
+		setUserApiData = jest.fn();
+		setFilteredUserData = jest.fn();
+		setError = jest.fn();
+	});
+
+	afterEach(() => {
+		jest.clearAllMocks();
+		jest.restoreAllMocks();
+	});
+
+	it('should fetch users and set userApiData and filteredUserData', async () => {
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				ok: true,
+				json: () => Promise.resolve(mockApiUsers),
+			})
+		) as jest.Mock;
+
+		await fetchUsers(setUserApiData, userApiData, setFilteredUserData, setError);
+
+		expect(setUserApiData).toHaveBeenCalledWith(mockApiUsers);
+		expect(setFilteredUserData).toHaveBeenCalledWith(userApiData);
+		expect(setError).not.toHaveBeenCalled();
+	});
+
+	it('should handle error when fetch user data failed', async () => {
+		const errorMessage = 'Failed to fetch user data';
+
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				ok: false,
+				json: () => Promise.resolve({ error: errorMessage }),
+			})
+		) as jest.Mock;
+
+		await fetchUsers(setUserApiData, userApiData, setFilteredUserData, setError);
+
+		expect(setError).toHaveBeenCalledWith(errorMessage);
+		expect(setUserApiData).not.toHaveBeenCalled();
+		expect(setFilteredUserData).not.toHaveBeenCalled();
+	});
+});
+
+
