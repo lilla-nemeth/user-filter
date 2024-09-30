@@ -14,7 +14,7 @@ interface UserAddress {
 	suite: string;
 	city: string;
 	zipcode: string;
-	geo: UserLocation[];
+	geo: UserLocation;
 }
 
 interface UserLocation {
