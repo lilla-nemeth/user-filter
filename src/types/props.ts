@@ -36,7 +36,7 @@ interface DropdownListProps {
 	data: User[];
 	setSortCategoryName: Dispatch<SetStateAction<string>>;
 	acceptedCategories: string[];
-	setUserAPIData: Dispatch<SetStateAction<User[]>>;
+	setUserApiData: Dispatch<SetStateAction<User[]>>;
 	isAscending: boolean;
 	setIsAscending: Dispatch<SetStateAction<boolean>>;
 	style?: React.CSSProperties;

@@ -17,7 +17,9 @@ import {
 	handleCardSorting,
 	handleDisplay,
 	handleDefaultName,
-} from './utils/helperFunctions';
+	fetchUsers,
+	handleClickOutside,
+} from './utils/functions';
 // Types
 import { User } from '@/types/data';
 import DropdownList from './components/DropdownList';
@@ -27,7 +29,7 @@ import { SORT_BY } from '@/types/constants';
 
 const Dashboard: React.FC = () => {
 	const [search, setSearch] = useState('');
-	const [userAPIData, setUserAPIData] = useState<User[]>([]);
+	const [userApiData, setUserApiData] = useState<User[]>([]);
 	const [filteredUserData, setFilteredUserData] = useState<User[]>([]);
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -37,40 +39,22 @@ const Dashboard: React.FC = () => {
 	const acceptedSortCategories: string[] = ['name', 'email'];
 
 	useEffect(() => {
-		const fetchUsers = async () => {
-			try {
-				const res = await fetch('http://localhost:3000/api/users');
-				if (!res.ok) {
-					// when failed to fetch data, user friendly error message is displayed:
-					throw new Error('Something went wrong, please come back later.');
-				}
-				const users: User[] = await res.json();
-				setUserAPIData(users);
-				setFilteredUserData(userAPIData);
-			} catch (err) {
-				setError((err as Error).message);
-			}
-		};
-		fetchUsers();
+		fetchUsers(setUserApiData, userApiData, setFilteredUserData, setError);
 	}, []);
 
 	useEffect(() => {
-		const handleClickOutside = (e: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-				setIsOpen(false);
-			}
-		};
+		const clickOutside = (e: MouseEvent) => handleClickOutside(e, dropdownRef, setIsOpen);
 
 		if (isOpen) {
-			document.addEventListener('mousedown', handleClickOutside);
+			document.addEventListener('mousedown', clickOutside);
 		}
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('mousedown', clickOutside);
 		};
 	}, [isOpen]);
 
-	// Event handler functions
+	// Event handler "wrapper" functions
 	const handleDropdownClick = (): void => {
 		handleDisplay(isOpen, setIsOpen);
 		handleDefaultName(isOpen, sortCategoryName, SORT_BY, setSortCategoryName);
@@ -78,7 +62,7 @@ const Dashboard: React.FC = () => {
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		handleText(setSearch, e);
-		handleUserData(search, setFilteredUserData, filteredData, userAPIData);
+		handleUserData(search, setFilteredUserData, filteredData, userApiData);
 	};
 
 	const returnCards = (data: User[]): React.ReactNode => {
@@ -103,7 +87,7 @@ const Dashboard: React.FC = () => {
 		return <div className='errorCard'>{error}</div>;
 	}
 
-	const filteredData = userAPIData.reduce((acc: User[], user: User): User[] => {
+	const filteredData = userApiData.reduce((acc: User[], user: User): User[] => {
 		const searchToLowerCase = search.toLowerCase();
 
 		const matches = Object.keys(user).some((key) => {
@@ -164,10 +148,10 @@ const Dashboard: React.FC = () => {
 								<DropdownList
 									dropdownListClass={styles.dropdownList}
 									dropdownItemClass={styles.dropdownItem}
-									data={userAPIData}
+									data={userApiData}
 									setSortCategoryName={setSortCategoryName}
 									acceptedCategories={acceptedSortCategories}
-									setUserAPIData={setUserAPIData}
+									setUserApiData={setUserApiData}
 									isAscending={isAscending}
 									setIsAscending={setIsAscending}
 									style={isOpen ? { borderRadius: '0 0 0.5rem 0.5rem ' } : { borderRadius: '0.5rem' }}
@@ -182,14 +166,14 @@ const Dashboard: React.FC = () => {
 							type={'button'}
 							onClick={() => {
 								setIsAscending(!isAscending);
-								handleCardSorting(sortUserCards, userAPIData, sortCategoryName, !isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, userApiData, sortCategoryName, !isAscending, setUserApiData);
 							}}
 							content={<SortingIcon className={styles.buttonIcon} isAscending={isAscending} />}
 						/>
 					</div>
 				</div>
 			</div>
-			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userAPIData)}</div>
+			<div className={styles.cardWrapper}>{search.length > 1 ? returnCards(filteredData) : returnCards(userApiData)}</div>
 		</div>
 	);
 };

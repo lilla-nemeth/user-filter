@@ -1,6 +1,5 @@
-import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/helperFunctions';
+import { listRequiredCategories, capitalizeString, sortUserCards, handleCardSorting } from '@/app/utils/functions';
 import { DropdownListProps } from '@/types/props';
-import { v4 as uuidv4 } from 'uuid';
 import { User } from '@/types/data';
 
 const DropdownList: React.FC<DropdownListProps> = (props) => {
@@ -10,7 +9,7 @@ const DropdownList: React.FC<DropdownListProps> = (props) => {
 		data,
 		acceptedCategories,
 		setSortCategoryName,
-		setUserAPIData,
+		setUserApiData,
 		isAscending,
 		setIsAscending,
 		style,
@@ -22,14 +21,14 @@ const DropdownList: React.FC<DropdownListProps> = (props) => {
 				{Object.keys(el).map((item) => {
 					return (
 						<div
-							key={uuidv4()}
+							key={el.id}
 							className={dropdownItemClass}
 							onClick={() => {
 								// filter categories to show only required ones
 								const category: string = listRequiredCategories(item, acceptedCategories, capitalizeString);
 								setSortCategoryName(category);
 								setIsAscending(isAscending);
-								handleCardSorting(sortUserCards, data, category, isAscending, setUserAPIData);
+								handleCardSorting(sortUserCards, data, category, isAscending, setUserApiData);
 							}}
 						>
 							{listRequiredCategories(item, acceptedCategories, capitalizeString)}

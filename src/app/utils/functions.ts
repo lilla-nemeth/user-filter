@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, ChangeEvent } from 'react';
-
 // Types
 import { User } from '@/types/data';
 
@@ -80,6 +79,36 @@ const handleCardSorting = (
 	stateSetter(sortedUserData);
 };
 
+const fetchUsers = async (
+	setUserApiData: Dispatch<SetStateAction<User[]>>,
+	userApiData: User[],
+	setFilteredUserData: Dispatch<SetStateAction<User[]>>,
+	setError: Dispatch<SetStateAction<string | null>>
+) => {
+	try {
+		const res = await fetch('http://localhost:3000/api/users');
+		if (!res.ok) {
+			const errorData = await res.json();
+			throw new Error(errorData.error || 'Failed to fetch user data');
+		}
+		const users: User[] = await res.json();
+		setUserApiData(users);
+		setFilteredUserData(userApiData);
+	} catch (err) {
+		setError((err as Error).message);
+	}
+};
+
+const handleClickOutside = (
+	e: MouseEvent,
+	dropdownRef: React.RefObject<HTMLDivElement>,
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+	if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+		setIsOpen(false);
+	}
+};
+
 export {
 	handleText,
 	handleUserData,
@@ -90,4 +119,6 @@ export {
 	listRequiredCategories,
 	sortUserCards,
 	handleCardSorting,
+	fetchUsers,
+	handleClickOutside,
 };
