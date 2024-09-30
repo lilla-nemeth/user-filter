@@ -154,3 +154,17 @@ describe('sortUserCards', () => {
 		expect(sortedUsers[1].email).toBe('janedoe@megacorp.com');
 	});
 });
+
+describe('handleCardSorting', () => {
+	it('should call stateSetter with sorting function (which has category and order check)', () => {
+		const setStateMock = jest.fn() as jest.Mock<Dispatch<SetStateAction<User[]>>>;
+		const category = 'Name';
+		const isAscending = true;
+
+		handleCardSorting(sortUserCards, mockApiUsers, category, isAscending, setStateMock);
+		expect(setStateMock).toHaveBeenCalled();
+
+		const sortedUsers = setStateMock.mock.calls[0][0];
+		expect(sortedUsers[0].name).toBe('Jane Doe');
+	});
+});
