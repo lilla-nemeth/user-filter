@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { capitalizeString, handleText, handleUserData } from '../utils/helperFunctions';
+import { capitalizeString, handleButtonClick, handleDisplay, handleText, handleUserData } from '../utils/helperFunctions';
 import { User } from '@/types/data';
 import { mockApiUsers, mockFilteredUsers } from '../__mocks__/testUsers';
 
@@ -34,5 +34,33 @@ describe('handleUserData', () => {
 
 		handleUserData('', setStateMock, mockFilteredUsers, mockApiUsers);
 		expect(setStateMock).toHaveBeenCalledWith(mockApiUsers);
+	});
+});
+
+describe('handleButtonClick', () => {
+	it('should call stateSetter with filteredData when button is clicked', () => {
+		const setStateMock: Dispatch<SetStateAction<User[]>> = jest.fn();
+		const mockFilteredData = mockApiUsers.slice(0, 2);
+
+		handleButtonClick(setStateMock, mockFilteredData);
+		expect(setStateMock).toHaveBeenCalledWith(mockFilteredData);
+	});
+});
+
+describe('handleDisplay', () => {
+	it('should toggle the isOpen state from false to true', () => {
+		const setStateMock: Dispatch<SetStateAction<boolean>> = jest.fn();
+		const initialOpenState = false;
+
+		handleDisplay(initialOpenState, setStateMock);
+		expect(setStateMock).toHaveBeenCalledWith(true);
+	});
+
+	it('should toggle the isOpen state from true to false', () => {
+		const setStateMock: Dispatch<SetStateAction<boolean>> = jest.fn();
+		const initialOpenState = true;
+
+		handleDisplay(initialOpenState, setStateMock);
+		expect(setStateMock).toHaveBeenCalledWith(false);
 	});
 });
