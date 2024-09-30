@@ -41,8 +41,8 @@ const Dashboard: React.FC = () => {
 			try {
 				const res = await fetch('http://localhost:3000/api/users');
 				if (!res.ok) {
-					// when failed to fetch data, user friendly error message is displayed:
-					throw new Error('Something went wrong, please come back later.');
+					const errorData = await res.json();
+					throw new Error(errorData.error || 'Failed to fetch user data');
 				}
 				const users: User[] = await res.json();
 				setUserApiData(users);
