@@ -4,12 +4,7 @@
 .cardWrapper {
 	display: flex;
 	flex-direction: column;
-	margin: $m-margin-top;
 	gap: $m-gap;
-}
-
-.cardWrapper:last-child {
-	margin: $m-margin-bottom;
 }
 
 .card {
@@ -240,7 +235,7 @@
 	}
 
 	.cardWrapper {
-		margin: 0 10em;
+		margin: 3rem 10em;
 	}
 }
 
@@ -251,7 +246,7 @@
 	}
 
 	.cardWrapper {
-		margin: 0 14em;
+		margin: 3rem 14em;
 	}
 }
 
@@ -265,13 +260,13 @@
 // XL-XXL devices - min. 1500px and max. 1919px
 @media (min-width: $xl-device-min) and (max-width: $xl-device-max) {
 	.cardWrapper {
-		margin: 0 16em;
+		margin: 3rem 16em;
 	}
 }
 
 // XXL devices - min. 1920px
 @media (min-width: $xxl-device-min) {
 	.cardWrapper {
-		margin: 0 20em;
+		margin: 3rem 20em;
 	}
 }

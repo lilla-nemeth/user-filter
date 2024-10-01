@@ -31,8 +31,11 @@ $m-gap: 2rem;
 $xs-margin: 0.25rem;
 $s-margin: 1rem;
 $s-margin-left-right: 0 1rem;
+$s-margin-left-top-right: 1rem 1rem 0 1rem;
 $m-margin-bottom: 0 0 2rem 0;
 $m-margin-top: 2rem 0 0 0;
+$l-margin: 3rem;
+$l-margin-top-bottom: 3rem 0;
 
 /* Padding */
 $xxs-padding-top-bottom: 0.5rem 0;
@@ -40,6 +43,7 @@ $xs-padding: 0.8rem;
 $s-padding: 1rem;
 $s-padding-bottom: 0 0 1rem 0;
 $m-padding: 2rem;
+$m-padding-bottom: 0 0 2rem 0;
 $l-padding: 3rem;
 
 /* Media query breakpoints */
