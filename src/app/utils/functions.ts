@@ -24,7 +24,6 @@ const handleDefaultName = (isOpen: boolean, categoryName: string, str: string, s
 	}
 };
 
-// Keeping capitalizeString as a separate function, make it reusable everywhere
 const capitalizeString = (string: string): string => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
