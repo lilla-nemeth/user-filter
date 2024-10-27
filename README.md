@@ -1,8 +1,8 @@
-# User Filter
+# Users Dashboard
 
 Built with React, TypeScript, Next.js, Sass and Jest.
 
-A Dashboard where user data is fetched and filtered by search, dropdown list and toggle button.
+A dashboard where users data is fetched and filtered by search, dropdown list and toggle button.
 
 ## Install
 
